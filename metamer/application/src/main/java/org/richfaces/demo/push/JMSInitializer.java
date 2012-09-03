@@ -65,7 +65,7 @@ public class JMSInitializer extends AbstractCapabilityInitializer {
     }
 
     private void initializeJMS() throws Exception {
-        provider = initializeCurrentProvider();
+        // provider = initializeCurrentProvider();
 
         if (provider != null) {
             createTopic(PUSH_JMS_TOPIC, "/topic/" + PUSH_JMS_TOPIC);
@@ -141,7 +141,8 @@ public class JMSInitializer extends AbstractCapabilityInitializer {
             } catch (InitializationFailedException e) {
                 LOGGER.severe(c.getSimpleName() + " initialization failed");
             } catch (Exception e) {
-                // throw new IllegalStateException(e);
+                // throw new IllegalStateException(e); // can't throw exception since it breaks loop
+                LOGGER.severe(c.getSimpleName() + " initialization failed due to " + e.getMessage());
             }
         }
         // throw new IllegalStateException("no management provider has been successfully initialized");
