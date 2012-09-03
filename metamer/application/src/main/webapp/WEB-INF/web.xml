@@ -43,6 +43,17 @@
         <param-name>org.richfaces.resourceMapping.packedStages</param-name>
         <param-value>None</param-value>
     </context-param>
+    
+    <context-param>
+    	<param-name>org.richfaces.push.jms.enabled</param-name>
+    	<param-value>true</param-value>
+    </context-param>
+    
+    <context-param>
+    	<param-name>org.richfaces.push.jms.connectionFactory</param-name>
+    	<param-value>ConnectionFactory</param-value>
+    </context-param>
+    
     <context-param>
         <param-name>org.richfaces.resourceMapping.enabled</param-name>
         <param-value>false</param-value>

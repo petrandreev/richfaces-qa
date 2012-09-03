@@ -141,10 +141,11 @@ public class JMSInitializer extends AbstractCapabilityInitializer {
             } catch (InitializationFailedException e) {
                 LOGGER.severe(c.getSimpleName() + " initialization failed");
             } catch (Exception e) {
-                throw new IllegalStateException(e);
+                // throw new IllegalStateException(e);
             }
         }
-        throw new IllegalStateException("no management provider has been successfully initialized");
+        // throw new IllegalStateException("no management provider has been successfully initialized");
+        return null;
     }
 
     /**
@@ -154,7 +155,7 @@ public class JMSInitializer extends AbstractCapabilityInitializer {
      */
     private static boolean isConnectionFactoryRegistered() {
         try {
-            return null != InitialContext.doLookup("java:/ConnectionFactory");
+            return null != InitialContext.doLookup("ConnectionFactory");
         } catch (NamingException e) {
             if (!(e instanceof NameNotFoundException)) {
                 LOGGER.log(Level.SEVERE, "Can't access naming context", e);
