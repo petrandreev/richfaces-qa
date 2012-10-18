@@ -28,6 +28,7 @@ import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 import com.google.common.base.Predicate;
+import eu.fryc.ghostdriver.PhantomJSDriver;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -85,7 +86,8 @@ public abstract class AbstractWebDriverTest<Page extends MetamerPage> extends Ab
         HTMLUnit(HtmlUnitDriver.class),
         //        Opera(OperaDriver.class),
         IPhone(IPhoneDriver.class),
-        Android(AndroidDriver.class);
+        Android(AndroidDriver.class),
+        Phantom(PhantomJSDriver.class);
         private final Class<?> clazz;
 
         private DriverType(Class<?> clazz) {

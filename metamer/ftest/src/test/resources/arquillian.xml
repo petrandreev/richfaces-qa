@@ -105,7 +105,8 @@
     </extension>
 
     <extension qualifier="webdriver">
-        <property name="browserCapabilities">firefox</property>
+        <property name="browserCapabilities">phantom</property>
+        <property name="phantomjs.binary">target/phantomjs</property>
     </extension>
 
 </arquillian>
