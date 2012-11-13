@@ -26,8 +26,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.validation.constraints.Min;
-import org.richfaces.component.UIPlaceholder;
-import org.richfaces.tests.metamer.Attributes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +38,6 @@ public class RichPlaceholderBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = LoggerFactory.getLogger(RichPlaceholderBean.class);
-    private Attributes attributes;
     private Object inputValue;
     @Min(value = 3)
     private Integer intValue;
@@ -48,18 +45,10 @@ public class RichPlaceholderBean implements Serializable {
     @PostConstruct
     public void init() {
         LOG.info("initializing bean " + getClass().getName());
-        attributes = Attributes.getComponentAttributesFromFacesConfig(UIPlaceholder.class, getClass());
+//        attributes = Attributes.getComponentAttributesFromFacesConfig(UIPlaceholder.class, getClass());
 
-        attributes.setAttribute("value", "Watermark text");
-        attributes.setAttribute("rendered", "true");
-        attributes.setAttribute("styleClass", "customPlaceholderClass");
-
-        attributes.remove("selector");
     }
 
-    public Attributes getAttributes() {
-        return attributes;
-    }
 
     public Object getInputValue() {
         return inputValue;
@@ -69,9 +58,6 @@ public class RichPlaceholderBean implements Serializable {
         return intValue;
     }
 
-    public void setAttributes(Attributes attributes) {
-        this.attributes = attributes;
-    }
 
     public void setInputValue(Object inputValue) {
         this.inputValue = inputValue;
