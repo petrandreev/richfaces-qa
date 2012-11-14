@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+<ui:composition>
+	<rich:panel id="messages" styleClass="message" style="width: 400px;"
+		rendered="#{rf12421.facesMessagesCount gt 0}"
+		onclick="jQuery(this).hide('fade');" header="Message:">
+		<rich:messages/>
+	</rich:panel>
+</ui:composition>
+</html>

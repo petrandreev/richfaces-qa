@@ -26,7 +26,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.validation.constraints.Min;
-import org.richfaces.component.UIPlaceholder;
+//import org.richfaces.component.UIPlaceholder;
 import org.richfaces.tests.metamer.Attributes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +48,7 @@ public class RichPlaceholderBean implements Serializable {
     @PostConstruct
     public void init() {
         LOG.info("initializing bean " + getClass().getName());
-        attributes = Attributes.getComponentAttributesFromFacesConfig(UIPlaceholder.class, getClass());
+//        attributes = Attributes.getComponentAttributesFromFacesConfig(UIPlaceholder.class, getClass());
 
         attributes.setAttribute("value", "Watermark text");
         attributes.setAttribute("rendered", "true");
