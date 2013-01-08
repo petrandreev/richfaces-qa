@@ -35,7 +35,7 @@
         <mojarra.excluded.libraries>WEB-INF/lib/myfaces-api-*,WEB-INF/lib/myfaces-impl-*,WEB-INF/lib/jsp-api*</mojarra.excluded.libraries>
         <myfaces.excluded.libraries>WEB-INF/lib/javax.faces-*,WEB-INF/lib/jsf-api-*,WEB-INF/lib/jsf-impl-*,WEB-INF/lib/jsp-api*</myfaces.excluded.libraries>
     </properties>
-
+    
     <dependencies>
         <!-- RichFaces 4 -->
         <dependency>
@@ -45,6 +45,7 @@
         <dependency>
             <groupId>org.richfaces.ui</groupId>
             <artifactId>richfaces-components-ui</artifactId>
+            <version>4.2.3.Final-redhat-1-bz-888815</version>
         </dependency>
         <dependency>
             <groupId>org.richfaces.cdk</groupId>
