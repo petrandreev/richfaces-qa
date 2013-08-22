@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:r="http://richfaces.org/rich">
+<h:head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<h:outputScript name="jsf.js" library="javax.faces" />
+</h:head>
+<h:body>
+	<h:form>
+		<r:panel header="Steps to reproduce issue">
+			<ol>
+				<li>See that table is rendered with default filter value.</li>
+				<li>Try to click on the link in any row.</li>
+				<li>See that action listener was called. There should be faces message rendered!</li>
+				<li>Erase the filter value, so all rows are shown (those with human as well).</li>
+				<li>Click on the link next to the value which was not shown previously. (One of the human)</li>
+				<li>See that action listener was not called! The faces massage has not been rendered!</li>
+			</ol>
+		</r:panel>
+		<r:messages />
+		<r:extendedDataTable value="#{tiltakServer.tiltak}" var="tiltak"
+			id="tiltakTable">
+			<r:column filter="#{tiltakFilter.tittelImpl}">
+				<f:facet name="header">
+					<h:outputText value="Tittel" />
+					<h:panelGroup styleClass="filter">
+						<h:inputText value="#{tiltakFilter.tittelFilter}">
+							<r:ajax event="keyup" render="tiltakTable@body" execute="@this" />
+						</h:inputText>
+					</h:panelGroup>
+				</f:facet>
+				<h:outputText value="#{tiltak.tittel}" />
+			</r:column>
+			<r:column>
+				<f:facet name="header">
+                    Edit
+                </f:facet>
+				<h:commandLink value="Goto">
+					<f:actionListener
+						type="org.richfaces.tests.metamer.bean.issues.rf13116.NormalActionListener" />
+				</h:commandLink>
+			</r:column>
+		</r:extendedDataTable>
+	</h:form>
+</h:body>
+</html>
