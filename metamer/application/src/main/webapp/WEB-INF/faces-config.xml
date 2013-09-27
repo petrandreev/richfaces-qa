@@ -28,8 +28,8 @@
     </application>
     
     <lifecycle>
-        <phase-listener>org.richfaces.tests.metamer.RichPhaseListener</phase-listener>
-        <phase-listener>org.richfaces.tests.metamer.ResponseDelayListener</phase-listener>
+<!--         <phase-listener>org.richfaces.tests.metamer.RichPhaseListener</phase-listener> -->
+<!--         <phase-listener>org.richfaces.tests.metamer.ResponseDelayListener</phase-listener> -->
     </lifecycle>
 
 </faces-config>
