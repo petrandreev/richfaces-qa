@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:metamer="http://java.sun.com/jsf/composite/metamer"
+      xmlns:r="http://richfaces.org">
+
+    <!--
+JBoss, Home of Professional Open Source
+Copyright 2010-2013, Red Hat, Inc. and individual contributors
+by the @authors tag. See the copyright.txt in the distribution for a
+full listing of individual contributors.
+
+This is free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation; either version 2.1 of
+the License, or (at your option) any later version.
+
+This software is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this software; if not, write to the Free
+Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+02110-1301 USA, or see the FSF site: http://www.fsf.org.
+    -->
+
+    <ui:composition template="/templates/template.xhtml">
+
+        <ui:define name="view">
+            <f:metadata>
+                <f:viewParam name="templates" value="#{templateBean.templates}">
+                    <f:converter converterId="templatesListConverter" />
+                </f:viewParam>
+            </f:metadata>
+        </ui:define>
+
+        <ui:define name="head"/>
+
+        <ui:define name="component">
+            <div id="cc" style="background-color: lightblue; width: 430px; padding: 10px">
+                Component controls (all events are set on mouseover):
+                <br/>
+                <h:commandButton id="showDateEditor" value="showDateEditor">
+                    <r:componentControl event="mouseover"
+                                        onbeforeoperation="#{richComponentControlBean.attributes['onbeforeoperation'].value}"
+                                        operation="showDateEditor"
+                                        selector="#{richComponentControlBean.attributes['selector'].value}"
+                                        target="#{richComponentControlBean.attributes['target'].value}"
+                                        />
+                </h:commandButton>
+                <h:commandButton id="setValue" value="setValue('Oct 10, 2012 12:00')">
+                    <r:componentControl event="mouseover"
+                                        onbeforeoperation="#{richComponentControlBean.attributes['onbeforeoperation'].value}"
+                                        operation="setValue"
+                                        selector="#{richComponentControlBean.attributes['selector'].value}"
+                                        target="#{richComponentControlBean.attributes['target'].value}"
+                                        >
+                        <f:param value="Oct 10, 2012 12:00"/>
+                    </r:componentControl>
+                </h:commandButton>
+                <h:commandButton id="showPopup" value="showPopup">
+                    <r:componentControl event="mouseover"
+                                        onbeforeoperation="#{richComponentControlBean.attributes['onbeforeoperation'].value}"
+                                        operation="showPopup"
+                                        selector="#{richComponentControlBean.attributes['selector'].value}"
+                                        target="#{richComponentControlBean.attributes['target'].value}"
+                                        />
+                </h:commandButton>
+                <h:commandButton id="switchPopup" value="switchPopup">
+                    <r:componentControl event="mouseover"
+                                        onbeforeoperation="#{richComponentControlBean.attributes['onbeforeoperation'].value}"
+                                        operation="switchPopup"
+                                        selector="#{richComponentControlBean.attributes['selector'].value}"
+                                        target="#{richComponentControlBean.attributes['target'].value}"
+                                        />
+                </h:commandButton>
+                <h:commandButton id="hideDateEditor" value="hideDateEditor">
+                    <r:componentControl event="mouseover"
+                                        onbeforeoperation="#{richComponentControlBean.attributes['onbeforeoperation'].value}"
+                                        operation="hideDateEditor"
+                                        selector="#{richComponentControlBean.attributes['selector'].value}"
+                                        target="#{richComponentControlBean.attributes['target'].value}"
+                                        />
+                </h:commandButton>
+                <h:commandButton id="hidePopup" value="hidePopup">
+                    <r:componentControl event="mouseover"
+                                        onbeforeoperation="#{richComponentControlBean.attributes['onbeforeoperation'].value}"
+                                        operation="hidePopup"
+                                        selector="#{richComponentControlBean.attributes['selector'].value}"
+                                        target="#{richComponentControlBean.attributes['target'].value}"
+                                        />
+                </h:commandButton>
+
+                <h:commandButton id="resetValue" value="resetValue">
+                    <r:componentControl event="mouseover"
+                                        onbeforeoperation="#{richComponentControlBean.attributes['onbeforeoperation'].value}"
+                                        operation="resetValue"
+                                        selector="#{richComponentControlBean.attributes['selector'].value}"
+                                        target="#{richComponentControlBean.attributes['target'].value}"
+                                        />
+                </h:commandButton>
+                <h:commandButton id="showSelectedDate" value="showSelectedDate">
+                    <r:componentControl event="mouseover"
+                                        onbeforeoperation="#{richComponentControlBean.attributes['onbeforeoperation'].value}"
+                                        operation="showSelectedDate"
+                                        selector="#{richComponentControlBean.attributes['selector'].value}"
+                                        target="#{richComponentControlBean.attributes['target'].value}"
+                                        />
+                </h:commandButton>
+
+                <br/>
+                Applicable when date is set:
+                <br/>
+                <h:commandButton id="today" value="today">
+                    <r:componentControl event="mouseover"
+                                        onbeforeoperation="#{richComponentControlBean.attributes['onbeforeoperation'].value}"
+                                        operation="today"
+                                        selector="#{richComponentControlBean.attributes['selector'].value}"
+                                        target="#{richComponentControlBean.attributes['target'].value}"
+                                        />
+                </h:commandButton>
+                <h:commandButton id="showTimeEditor" value="showTimeEditor">
+                    <r:componentControl event="mouseover"
+                                        onbeforeoperation="#{richComponentControlBean.attributes['onbeforeoperation'].value}"
+                                        operation="showTimeEditor"
+                                        selector="#{richComponentControlBean.attributes['selector'].value}"
+                                        target="#{richComponentControlBean.attributes['target'].value}"
+                                        />
+                </h:commandButton>
+                <h:commandButton id="hideTimeEditor" value="hideTimeEditor">
+                    <r:componentControl event="mouseover"
+                                        onbeforeoperation="#{richComponentControlBean.attributes['onbeforeoperation'].value}"
+                                        operation="hideTimeEditor"
+                                        selector="#{richComponentControlBean.attributes['selector'].value}"
+                                        target="#{richComponentControlBean.attributes['target'].value}"
+                                        />
+                </h:commandButton>
+
+                <h:commandButton id="getValue" value="getValue" disabled="true">
+                    <r:componentControl event="mouseover"
+                                        onbeforeoperation="#{richComponentControlBean.attributes['onbeforeoperation'].value}"
+                                        operation="getValue"
+                                        selector="#{richComponentControlBean.attributes['selector'].value}"
+                                        target="#{richComponentControlBean.attributes['target'].value}"
+                                        />
+                </h:commandButton>
+                <h:commandButton id="getValueAsString" value="getValueAsString" disabled="true">
+                    <r:componentControl event="mouseover"
+                                        onbeforeoperation="#{richComponentControlBean.attributes['onbeforeoperation'].value}"
+                                        operation="getValueAsString"
+                                        selector="#{richComponentControlBean.attributes['selector'].value}"
+                                        target="#{richComponentControlBean.attributes['target'].value}"
+                                        />
+                </h:commandButton>
+                <h:commandButton id="getCurrentMonth" value="getCurrentMonth" disabled="true">
+                    <r:componentControl event="mouseover"
+                                        onbeforeoperation="#{richComponentControlBean.attributes['onbeforeoperation'].value}"
+                                        operation="getCurrentMonth"
+                                        selector="#{richComponentControlBean.attributes['selector'].value}"
+                                        target="#{richComponentControlBean.attributes['target'].value}"
+                                        />
+                </h:commandButton>
+                <h:commandButton id="getCurrentYear" value="getCurrentYear" disabled="true">
+                    <r:componentControl event="mouseover"
+                                        onbeforeoperation="#{richComponentControlBean.attributes['onbeforeoperation'].value}"
+                                        operation="getCurrentYear"
+                                        selector="#{richComponentControlBean.attributes['selector'].value}"
+                                        target="#{richComponentControlBean.attributes['target'].value}"
+                                        />
+                </h:commandButton>
+            </div>
+
+            <br/><br/><br/><br/><br/>
+            <br/><br/><br/><br/><br/>
+            <r:calendar id="controlledComponent"
+                        styleClass="controlledComponent"
+                        datePattern="MMM d, yyyy HH:mm"
+                        value="#{richCalendarBean.attributes['value'].value}"
+                        />
+        </ui:define>
+
+        <ui:define name="outOfTemplateAfter">
+            <br/>
+            <metamer:attributes value="#{richComponentControlBean.attributes}" id="attributes" />
+        </ui:define>
+
+    </ui:composition>
+</html>

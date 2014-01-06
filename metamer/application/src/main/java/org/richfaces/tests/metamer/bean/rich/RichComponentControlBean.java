@@ -57,11 +57,13 @@ public class RichComponentControlBean implements Serializable {
 
         attributes = Attributes.getBehaviorAttributesFromFacesConfig(ComponentControlBehavior.class, getClass());
 
-        attributes.setAttribute("operation", "previous");
-        attributes.setAttribute("target", "scroller");
+        attributes.setAttribute("event", "click");
+        attributes.setAttribute("target", "controlledComponent");
 
         // The 'event' attribute for behavior tag must be a literal
         attributes.remove("event");
+        // there will be all operations hardcoded on the sample
+        attributes.remove("operation");
     }
 
     public Attributes getAttributes() {

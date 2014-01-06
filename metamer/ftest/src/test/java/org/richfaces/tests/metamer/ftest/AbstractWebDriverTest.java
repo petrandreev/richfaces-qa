@@ -213,6 +213,7 @@ public abstract class AbstractWebDriverTest extends AbstractMetamerTest {
             Object executedScriptResult = executeJS(script, args);
             if (executedScriptResult != null) {
                 result = ((String) executedScriptResult).trim();
+                System.out.println("result = " + result);
                 if (result.equals(expectedValue)) {
                     return result;
                 }
