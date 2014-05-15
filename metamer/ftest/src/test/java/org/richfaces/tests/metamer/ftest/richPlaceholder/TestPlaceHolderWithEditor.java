@@ -222,6 +222,7 @@ public class TestPlaceHolderWithEditor extends AbstractPlaceholderTest {
     @Test(groups = "Future")
     @IssueTracking({ "https://issues.jboss.org/browse/RF-12624", "https://issues.jboss.org/browse/RF-12632" })
     @Override
+    @Templates("plain")
     public void testStyleClass() {
         placeholderAttributes.set(PlaceholderAttributes.styleClass, "metamer-ftest-class");
         assertTrue(getInput1StyleClass().contains("metamer-ftest-class"),

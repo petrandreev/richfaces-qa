@@ -100,6 +100,7 @@ public class TestPlaceHolderWithCalendar extends AbstractPlaceholderJSFTest {
 
     @Test
     @Override
+    @Templates("plain")
     public void testStyleClass() {
         super.testStyleClass();
     }

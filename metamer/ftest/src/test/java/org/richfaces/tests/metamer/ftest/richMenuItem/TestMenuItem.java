@@ -347,11 +347,13 @@ public class TestMenuItem extends AbstractWebDriverTest {
     }
 
     @Test
+    @Templates("plain")
     public void testStyle() {
         testStyle(menuItem1);
     }
 
     @Test
+    @Templates("plain")
     public void testStyleClass() {
         testStyleClass(menuItem1);
     }

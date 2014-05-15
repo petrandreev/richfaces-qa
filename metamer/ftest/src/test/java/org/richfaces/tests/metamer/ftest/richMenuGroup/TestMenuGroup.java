@@ -318,11 +318,13 @@ public class TestMenuGroup extends AbstractWebDriverTest {
     }
 
     @Test
+    @Templates("plain")
     public void testStyle() {
         testStyle(group);
     }
 
     @Test
+    @Templates("plain")
     public void testStyleClass() {
         testStyleClass(group);
     }

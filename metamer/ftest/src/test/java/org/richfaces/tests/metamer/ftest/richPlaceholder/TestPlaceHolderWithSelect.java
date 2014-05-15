@@ -111,6 +111,7 @@ public class TestPlaceHolderWithSelect extends AbstractPlaceholderJSFTest {
     @Test
     @RegressionTest("https://issues.jboss.org/browse/RF-12623")
     @Override
+    @Templates("plain")
     public void testStyleClass() {
         super.testStyleClass();
     }

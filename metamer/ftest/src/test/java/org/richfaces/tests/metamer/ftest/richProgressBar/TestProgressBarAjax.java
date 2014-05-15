@@ -385,11 +385,13 @@ public class TestProgressBarAjax extends AbstractWebDriverTest {
     }
 
     @Test
+    @Templates("plain")
     public void testStyle() {
         testStyle(page.progressBar);
     }
 
     @Test
+    @Templates("plain")
     public void testStyleClass() {
         testStyleClass(page.progressBar);
     }

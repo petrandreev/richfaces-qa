@@ -298,11 +298,13 @@ public class TestDataScrollerAttributes extends AbstractWebDriverTest {
     }
 
     @Test
+    @Templates("plain")
     public void testStyle() {
         super.testStyle(page.getScroller(scroller).advanced().getRootElement());
     }
 
     @Test
+    @Templates("plain")
     public void testStyleClass() {
         super.testStyleClass(page.getScroller(scroller).advanced().getRootElement());
     }

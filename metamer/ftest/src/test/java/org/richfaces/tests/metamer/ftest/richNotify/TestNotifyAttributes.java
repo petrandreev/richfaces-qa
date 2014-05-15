@@ -230,6 +230,7 @@ public class TestNotifyAttributes extends AbstractWebDriverTest {
     }
 
     @Test
+    @Templates("plain")
     public void testStyleClass() {
         testStyleClass(message.advanced().getRootElement());
     }
