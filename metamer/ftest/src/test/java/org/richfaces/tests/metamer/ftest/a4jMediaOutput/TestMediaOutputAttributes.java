@@ -220,6 +220,7 @@ public class TestMediaOutputAttributes extends AbstractMediaOutputTest {
     }
 
     @Test
+    @Templates("plain")
     public void testTitle() {
         testTitle(mediaOutput);
     }
