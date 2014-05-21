@@ -36,7 +36,6 @@
 
     <modules>
         <module>application</module>
-        <module>ftest</module>
         <module>ftest-legacy</module>
     </modules>
 
