@@ -25,6 +25,7 @@ import org.jboss.arquillian.graphene.condition.element.WebElementConditionFactor
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.richfaces.fragment.accordion.RichFacesAccordion;
+import org.richfaces.fragment.common.Icon;
 import org.richfaces.tests.metamer.ftest.webdriver.MetamerPage;
 
 /**
@@ -37,18 +38,18 @@ public class AccordionPage extends MetamerPage {
     @FindBy(css = "div[id$=accordion]")
     private RichFacesAccordion accordion;
 
-    @FindBy(css = "div[id$=item1] td.rf-ac-itm-ico div.rf-ac-itm-ico-act")
-    private WebElement leftActiveIcon;
-    @FindBy(css = "div[id$=item1] td.rf-ac-itm-exp-ico div.rf-ac-itm-ico-act")
-    private WebElement rightActiveIcon;
-    @FindBy(css = "div[id$=item4] td.rf-ac-itm-ico div.rf-ac-itm-ico-inact")
-    private WebElement leftDisabledIcon;
-    @FindBy(css = "div[id$=item4] td.rf-ac-itm-exp-ico div.rf-ac-itm-ico-inact")
-    private WebElement rightDisabledIcon;
-    @FindBy(css = "div[id$=item3] td.rf-ac-itm-ico div.rf-ac-itm-ico-inact")
-    private WebElement leftInactiveIcon;
-    @FindBy(css = "div[id$=item3] td.rf-ac-itm-exp-ico div.rf-ac-itm-ico-inact")
-    private WebElement rightInactiveIcon;
+    @FindBy(css = "div[id$=item1] td.rf-ac-itm-ico")
+    private Icon leftActiveIcon;
+    @FindBy(css = "div[id$=item1] td.rf-ac-itm-exp-ico")
+    private Icon rightActiveIcon;
+    @FindBy(css = "div[id$=item4] td.rf-ac-itm-ico")
+    private Icon leftDisabledIcon;
+    @FindBy(css = "div[id$=item4] td.rf-ac-itm-exp-ico ")
+    private Icon rightDisabledIcon;
+    @FindBy(css = "div[id$=item3] td.rf-ac-itm-ico")
+    private Icon leftInactiveIcon;
+    @FindBy(css = "div[id$=item3] td.rf-ac-itm-exp-ico")
+    private Icon rightInactiveIcon;
 
     public RichFacesAccordion getAccordion() {
         return accordion;
@@ -58,27 +59,27 @@ public class AccordionPage extends MetamerPage {
         return accordion.advanced().getRootElement();
     }
 
-    public WebElement getLeftActiveIcon() {
+    public Icon getLeftActiveIcon() {
         return leftActiveIcon;
     }
 
-    public WebElement getRightActiveIcon() {
+    public Icon getRightActiveIcon() {
         return rightActiveIcon;
     }
 
-    public WebElement getLeftDisabledIcon() {
+    public Icon getLeftDisabledIcon() {
         return leftDisabledIcon;
     }
 
-    public WebElement getRightDisabledIcon() {
+    public Icon getRightDisabledIcon() {
         return rightDisabledIcon;
     }
 
-    public WebElement getLeftInactiveIcon() {
+    public Icon getLeftInactiveIcon() {
         return leftInactiveIcon;
     }
 
-    public WebElement getRightInactiveIcon() {
+    public Icon getRightInactiveIcon() {
         return rightInactiveIcon;
     }
 

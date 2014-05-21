@@ -31,6 +31,7 @@ import java.util.Map;
 import org.apache.commons.lang.Validate;
 import org.richfaces.fragment.common.Icon;
 import org.richfaces.tests.metamer.ftest.attributes.AttributeEnum;
+import org.richfaces.tests.metamer.ftest.richPanelMenu.TestPanelMenuIcon.PanelMenuItemIcon;
 import org.richfaces.tests.metamer.ftest.webdriver.Attributes;
 
 import com.google.common.collect.Lists;
@@ -98,6 +99,19 @@ public class IconsChecker<A extends AttributeEnum> {
         checkImageIcons(attribute, icon, classSuffix);
         checkNone(attribute, icon, classSuffix);
     }
+    /**
+     * checkCssImageIcons, checkCssNoImageIcons, checkImageIcons, checkNone
+     *
+     * @param attribute
+     * @param icon
+     * @param classSuffix
+     */
+    public void checkAll(A attribute, PanelMenuItemIcon icon, String classSuffix) {
+        checkCssImageIcons(attribute, icon, classSuffix);
+        checkCssNoImageIcons(attribute, icon, classSuffix);
+        checkImageIcons(attribute, icon, classSuffix);
+        checkNone(attribute, icon, classSuffix);
+    }
 
     /**
      * Checks whether icons controlled by CSS work properly (only icons which
@@ -127,6 +141,32 @@ public class IconsChecker<A extends AttributeEnum> {
 
     /**
      * Checks whether icons controlled by CSS work properly (only icons which
+     * produce an image)
+     *
+     * @param attribute icon attribute
+     * @param icon
+     * @param classSuffix
+     */
+    public void checkCssImageIcons(A attribute, PanelMenuItemIcon icon, String classSuffix) {
+        String imageNameSuffix = "";
+        if (classSuffix.contains("dis")) {
+            imageNameSuffix = "Disabled";
+        }
+        // option -> css class
+        for (String cssIcon : cssImageIcons.keySet()) {
+            if (!setAttributeSilently(attribute, cssIcon)) {
+                continue;
+            }
+            assertTrue(
+                icon.getRootElement().getAttribute("class").contains(iconPrefix + cssImageIcons.get(cssIcon) + iconSuffix + classSuffix),
+                "Div should have set class " + iconPrefix + cssImageIcons.get(cssIcon) + iconSuffix + classSuffix + ".");
+            assertTrue(icon.getRootElement().getCssValue("background-image").contains(cssIcon + imageNameSuffix),
+                "Icon should contain a " + cssIcon + ".");
+        }
+    }
+
+    /**
+     * Checks whether icons controlled by CSS work properly (only icons which
      * don't produce any image)
      *
      * @param attribute icon attribute
@@ -147,6 +187,27 @@ public class IconsChecker<A extends AttributeEnum> {
     }
 
     /**
+     * Checks whether icons controlled by CSS work properly (only icons which
+     * don't produce any image)
+     *
+     * @param attribute icon attribute
+     * @param icon
+     * @param classSuffix
+     */
+    public void checkCssNoImageIcons(A attribute, PanelMenuItemIcon icon, String classSuffix) {
+        for (String cssIcon : cssNoImageIcons) {
+            if (!setAttributeSilently(attribute, cssIcon)) {
+                continue;
+            }
+            assertTrue(
+                icon.getRootElement().getAttribute("class").contains(iconPrefix + cssIcon + iconSuffix + classSuffix),
+                "Div should have set class " + iconPrefix + cssIcon + iconSuffix + classSuffix + ".");
+            assertTrue(icon.getRootElement().getCssValue("background-image").equals("none"),
+                "Icon should not contain any image.");
+        }
+    }
+
+    /**
      * Checks whether icon with custom URL works properly
      *
      * @param attribute icon attribute
@@ -161,7 +222,27 @@ public class IconsChecker<A extends AttributeEnum> {
             }
             assertFalse(icon.getIconDivElement().isPresent(), "Icon's div should not be present when icon=" + imageIcon + ".");
             assertTrue(icon.getIconImageElement().isPresent(), "Icon's image should be rendered when icon=" + imageIcon + ".");
-            assertTrue(icon.getIconElement().getAttribute("src").contains(imageIcons.get(imageIcon)),
+            assertTrue(icon.getIconImageElement().getAttribute("src").contains(imageIcons.get(imageIcon)),
+                "Icon's src attribute should contain " + imageIcons.get(imageIcon) + " when icon=" + imageIcon + ".");
+        }
+    }
+
+    /**
+     * Checks whether icon with custom URL works properly
+     *
+     * @param attribute icon attribute
+     * @param icon
+     * @param classSuffix
+     */
+    public void checkImageIcons(A attribute, PanelMenuItemIcon icon, String classSuffix) {
+        // option -> image
+        for (String imageIcon : imageIcons.keySet()) {
+            if (!setAttributeSilently(attribute, imageIcon)) {
+                continue;
+            }
+            assertFalse(icon.getIconDivElement().isPresent(), "Icon's div should not be present when icon=" + imageIcon + ".");
+            assertTrue(icon.getIconImageElement().isPresent(), "Icon's image should be rendered when icon=" + imageIcon + ".");
+            assertTrue(icon.getIconImageElement().getAttribute("src").contains(imageIcons.get(imageIcon)),
                 "Icon's src attribute should contain " + imageIcons.get(imageIcon) + " when icon=" + imageIcon + ".");
         }
     }

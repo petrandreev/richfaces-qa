@@ -27,6 +27,7 @@ import org.jboss.arquillian.graphene.findby.FindByJQuery;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.richfaces.fragment.accordion.RichFacesAccordion;
+import org.richfaces.fragment.common.Icon;
 import org.richfaces.tests.metamer.ftest.webdriver.MetamerPage;
 
 /**
@@ -54,23 +55,23 @@ public class AccordionItemPage extends MetamerPage {
     @FindByJQuery(value = "div[id$='header'].[id*='item'] div.rf-ac-itm-lbl-dis")
     private List<WebElement> disabledHeaders;
 
-    @FindByJQuery(value = "div[id$=item1] td.rf-ac-itm-ico div")
-    private WebElement leftActiveIcon;
+    @FindByJQuery(value = "div[id$=item1] td.rf-ac-itm-ico")
+    private Icon leftActiveIcon;
 
-    @FindByJQuery(value = "div[id$=item1] td.rf-ac-itm-ico div.rf-ac-itm-ico-act")
-    private WebElement leftDisabledIcon;
+    @FindByJQuery(value = "div[id$=item1] td.rf-ac-itm-ico")
+    private Icon leftDisabledIcon;
 
-    @FindByJQuery(value = "div[id$=item1] td.rf-ac-itm-ico div.rf-ac-itm-ico-inact")
-    private WebElement leftInactiveIcon;
+    @FindByJQuery(value = "div[id$=item1] td.rf-ac-itm-ico")
+    private Icon leftInactiveIcon;
 
-    @FindByJQuery(value = "div[id$=item1] td.rf-ac-itm-exp-ico div")
-    private WebElement rightActiveIcon;
+    @FindByJQuery(value = "div[id$=item1] td.rf-ac-itm-exp-ico")
+    private Icon rightActiveIcon;
 
-    @FindByJQuery(value = "div[id$=item1] td.rf-ac-itm-exp-ico div.rf-ac-itm-ico-act")
-    private WebElement rightDisabledIcon;
+    @FindByJQuery(value = "div[id$=item1] td.rf-ac-itm-exp-ico")
+    private Icon rightDisabledIcon;
 
-    @FindByJQuery(value = "div[id$=item1] td.rf-ac-itm-exp-ico div.rf-ac-itm-ico-inact")
-    private WebElement rightInactiveIcon;
+    @FindByJQuery(value = "div[id$=item1] td.rf-ac-itm-exp-ico")
+    private Icon rightInactiveIcon;
 
     private String leftIconSelector = "div[id$=item1] td.rf-ac-itm-ico";
     private String rightIconSelector = "div[id$=item1] td.rf-ac-itm-exp-ico";
@@ -111,27 +112,27 @@ public class AccordionItemPage extends MetamerPage {
         return disabledHeaders;
     }
 
-    public WebElement getLeftActiveIcon() {
+    public Icon getLeftActiveIcon() {
         return leftActiveIcon;
     }
 
-    public WebElement getLeftDisabledIcon() {
+    public Icon getLeftDisabledIcon() {
         return leftDisabledIcon;
     }
 
-    public WebElement getLeftInactiveIcon() {
+    public Icon getLeftInactiveIcon() {
         return leftInactiveIcon;
     }
 
-    public WebElement getRightActiveIcon() {
+    public Icon getRightActiveIcon() {
         return rightActiveIcon;
     }
 
-    public WebElement getRightDisabledIcon() {
+    public Icon getRightDisabledIcon() {
         return rightDisabledIcon;
     }
 
-    public WebElement getRightInactiveIcon() {
+    public Icon getRightInactiveIcon() {
         return rightInactiveIcon;
     }
 }

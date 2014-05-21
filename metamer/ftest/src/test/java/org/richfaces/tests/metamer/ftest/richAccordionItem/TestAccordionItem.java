@@ -42,14 +42,14 @@ import java.net.URL;
 import org.jboss.arquillian.graphene.findby.ByJQuery;
 import org.jboss.arquillian.graphene.findby.FindByJQuery;
 import org.jboss.arquillian.graphene.page.Page;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.richfaces.fragment.common.Icon;
 import org.richfaces.tests.metamer.ftest.AbstractWebDriverTest;
 import org.richfaces.tests.metamer.ftest.annotations.RegressionTest;
-import org.richfaces.tests.metamer.ftest.checker.IconsCheckerWebdriver;
+import org.richfaces.tests.metamer.ftest.checker.IconsChecker;
 import org.richfaces.tests.metamer.ftest.extension.configurator.templates.annotation.Templates;
 import org.richfaces.tests.metamer.ftest.webdriver.Attributes;
 import org.testng.annotations.Test;
@@ -88,13 +88,8 @@ public class TestAccordionItem extends AbstractWebDriverTest {
         return elem.getAttribute("class").contains(className);
     }
 
-    private void verifyStandardIcons(AccordionItemAttributes attribute, WebElement icon, By image, String classSuffix) {
-        IconsCheckerWebdriver checker = new IconsCheckerWebdriver<AccordionItemAttributes>(driver, accordionItemAttributes,
-            "rf-ico-", "-hdr");
-        checker.checkCssImageIcons(attribute, new IconsCheckerWebdriver.WebElementLocator(icon), classSuffix);
-        checker.checkCssNoImageIcons(attribute, new IconsCheckerWebdriver.WebElementLocator(icon), classSuffix);
-        checker.checkImageIcons(attribute, new IconsCheckerWebdriver.WebElementLocator(icon), image, classSuffix);
-        checker.checkNone(attribute, new IconsCheckerWebdriver.WebElementLocator(icon), classSuffix);
+    private void verifyStandardIcons(AccordionItemAttributes attribute, Icon icon, String classSuffix) {
+        new IconsChecker<AccordionItemAttributes>(accordionItemAttributes, "rf-ico-", "-hdr").checkAll(attribute, icon, classSuffix);
     }
 
     @Test
@@ -197,8 +192,6 @@ public class TestAccordionItem extends AbstractWebDriverTest {
     @Templates("plain")
     @RegressionTest("https://issues.jboss.org/browse/RF-10488")
     public void testLeftActiveIcon() {
-        By image = By.cssSelector(page.getLeftIconSelector() + " img");
-
         // icon should not be locateable
         for (int i = 1; i < 6; i++) {
             try {
@@ -209,14 +202,12 @@ public class TestAccordionItem extends AbstractWebDriverTest {
         }
         guardAjax(page.getItemHeaders().get(0)).click();
         waitAjax(driver).until().element(page.getItemContents().get(0)).is().visible();
-        verifyStandardIcons(AccordionItemAttributes.leftActiveIcon, page.getLeftActiveIcon(), image, "");
+        verifyStandardIcons(AccordionItemAttributes.leftActiveIcon, page.getLeftActiveIcon(), "");
     }
 
     @Test
     @Templates("plain")
     public void testLeftDisabledIcon() {
-        By image = By.cssSelector(page.getLeftIconSelector() + " img");
-
         // icon should not be locateable
         for (int i = 1; i < 6; i++) {
             try {
@@ -225,17 +216,13 @@ public class TestAccordionItem extends AbstractWebDriverTest {
                 // ok
             }
         }
-
         accordionItemAttributes.set(AccordionItemAttributes.disabled, true);
-
-        verifyStandardIcons(AccordionItemAttributes.leftDisabledIcon, page.getLeftDisabledIcon(), image, "-dis");
+        verifyStandardIcons(AccordionItemAttributes.leftDisabledIcon, page.getLeftDisabledIcon(), "-dis");
     }
 
     @Test
     @Templates("plain")
     public void testLeftInactiveIcon() {
-        By image = By.cssSelector(page.getLeftIconSelector() + " img");
-
         // icon should not be locateable
         for (int i = 1; i < 6; i++) {
             try {
@@ -244,8 +231,7 @@ public class TestAccordionItem extends AbstractWebDriverTest {
                 // ok
             }
         }
-
-        verifyStandardIcons(AccordionItemAttributes.leftInactiveIcon, page.getLeftInactiveIcon(), image, "");
+        verifyStandardIcons(AccordionItemAttributes.leftInactiveIcon, page.getLeftInactiveIcon(), "");
     }
 
     @Test
@@ -369,8 +355,6 @@ public class TestAccordionItem extends AbstractWebDriverTest {
     @Test
     @Templates("plain")
     public void testRightActiveIcon() {
-        By image = By.cssSelector(page.getRightIconSelector() + " img");
-
         // icon should not be locateable
         for (int i = 1; i < 6; i++) {
             try {
@@ -381,14 +365,12 @@ public class TestAccordionItem extends AbstractWebDriverTest {
         }
         guardAjax(page.getItemHeaders().get(0)).click();
         waitAjax(driver).until().element(page.getItemContents().get(0)).is().visible();
-        verifyStandardIcons(AccordionItemAttributes.rightActiveIcon, page.getRightActiveIcon(), image, "");
+        verifyStandardIcons(AccordionItemAttributes.rightActiveIcon, page.getRightActiveIcon(), "");
     }
 
     @Test
     @Templates("plain")
     public void testRightDisabledIcon() {
-        By image = By.cssSelector(page.getRightIconSelector() + " img");
-
         // icon should not be locateable
         for (int i = 1; i < 6; i++) {
             try {
@@ -397,17 +379,13 @@ public class TestAccordionItem extends AbstractWebDriverTest {
                 // ok
             }
         }
-
         accordionItemAttributes.set(AccordionItemAttributes.disabled, true);
-
-        verifyStandardIcons(AccordionItemAttributes.rightDisabledIcon, page.getRightDisabledIcon(), image, "-dis");
+        verifyStandardIcons(AccordionItemAttributes.rightDisabledIcon, page.getRightDisabledIcon(), "-dis");
     }
 
     @Test
     @Templates("plain")
     public void testRightInactiveIcon() {
-        By image = By.cssSelector(page.getRightIconSelector() + " img");
-
         // icon should not be locateable
         for (int i = 1; i < 6; i++) {
             try {
@@ -416,8 +394,7 @@ public class TestAccordionItem extends AbstractWebDriverTest {
                 // ok
             }
         }
-
-        verifyStandardIcons(AccordionItemAttributes.rightInactiveIcon, page.getRightInactiveIcon(), image, "");
+        verifyStandardIcons(AccordionItemAttributes.rightInactiveIcon, page.getRightInactiveIcon(), "");
     }
 
     @Test
