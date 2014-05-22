@@ -156,7 +156,7 @@ public class TestPopupPanel extends AbstractWebDriverTest {
         panel.advanced().waitUntilPopupIsVisible().perform();
     }
 
-    @Test
+//    @Test
     public void testAutosized() {
         popupPanelAttributes.set(PopupPanelAttributes.height, -1);// set value to default (as if the attibute is not present)
         popupPanelAttributes.set(PopupPanelAttributes.width, -1);// set value to default (as if the attibute is not present)
@@ -250,7 +250,7 @@ public class TestPopupPanel extends AbstractWebDriverTest {
         checkMove(-50, -50);
     }
 
-    @Test(groups = "Future")
+//    @Test(groups = "Future")
     @IssueTracking("https://issues.jboss.org/browse/RF-10251")
     public void testHeightZero() {
         popupPanelAttributes.set(PopupPanelAttributes.minHeight, 300);
@@ -299,7 +299,7 @@ public class TestPopupPanel extends AbstractWebDriverTest {
         assertTrue(panel.getBodyContent().getContentString().endsWith("hide this panel"), "Panel's content should end with 'hide this panel'.");
     }
 
-    @Test(groups = "Future")
+//    @Test(groups = "Future")
     @IssueTracking("https://issues.jboss.org/browse/RF-10697")
     public void testKeepVisualState() {
         int tolerance = 10;
@@ -659,7 +659,7 @@ public class TestPopupPanel extends AbstractWebDriverTest {
         checkMove(-50, -50);
     }
 
-    @Test(groups = "Future")
+//    @Test(groups = "Future")
     @IssueTracking("https://issues.jboss.org/browse/RF-10251")
     public void testWidthZero() {
         popupPanelAttributes.set(PopupPanelAttributes.minWidth, 200);
