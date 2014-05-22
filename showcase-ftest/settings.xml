@@ -70,7 +70,7 @@
 
 <activeProfiles>
 <activeProfile>local</activeProfile>
-<!--<activeProfile>staging</activeProfile>-->
+<activeProfile>staging</activeProfile>
 </activeProfiles>
 
 </settings>
