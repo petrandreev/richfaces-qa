@@ -2,12 +2,12 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.richfaces.tests</groupId>
-        <artifactId>richfaces-qa-parent</artifactId>
-        <version>5.0.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
+    <!--<parent>-->
+    <groupId>org.richfaces.tests</groupId>
+    <!--<artifactId>richfaces-qa-parent</artifactId>-->
+    <version>5.0.0-SNAPSHOT</version>
+    <!--<relativePath>../pom.xml</relativePath>-->
+    <!--</parent>-->
 
     <artifactId>richfaces-showcase-ftest</artifactId>
     <packaging>jar</packaging>
@@ -25,7 +25,27 @@
         <android.sdk.home />
         <android.apk.version>2.21.0</android.apk.version>
         <android.skip>true</android.skip>
+        <jboss7-1Home>${project.build.directory}/jboss-as-7.1.1.Final</jboss7-1Home>
     </properties>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>1.1.4.Final</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-bom</artifactId>
+                <version>1.3.0.Final</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!-- RichFaces dependencies -->
@@ -33,8 +53,8 @@
             <groupId>org.richfaces.examples</groupId>
             <artifactId>richfaces-showcase</artifactId>
             <type>war</type>
-            <version>${version.richfaces}</version>
-            <classifier>${showcase.classifier}</classifier>
+            <version>5.0.0-SNAPSHOT</version>
+            <classifier>jbas71</classifier>
         </dependency>
         <!-- Arquillian dependencies -->
         <dependency>
@@ -48,22 +68,42 @@
             <artifactId>arquillian-graphene</artifactId>
             <type>pom</type>
             <scope>test</scope>
+            <version>2.1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.richfaces.tests</groupId>
             <artifactId>webdriver-utils</artifactId>
             <scope>test</scope>
-            <version>${project.version}</version>
+            <version>5.0.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.arquillian.graphene</groupId>
+                    <artifactId>graphene-webdriver</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.graphene</groupId>
+            <artifactId>arquillian-browser-screenshooter</artifactId>
+            <version>2.1.0-SNAPSHOT</version>
         </dependency>
         <!-- Page Fragments Implementations -->
         <dependency>
             <groupId>org.richfaces</groupId>
             <artifactId>richfaces-page-fragments</artifactId>
             <scope>test</scope>
+            <version>5.0.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.arquillian.graphene</groupId>
+                    <artifactId>graphene-webdriver</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
+            <version>6.8.8</version>
         </dependency>
     </dependencies>
 
@@ -83,8 +123,8 @@
                                 <artifactItem>
                                     <groupId>org.richfaces.examples</groupId>
                                     <artifactId>richfaces-showcase</artifactId>
-                                    <version>${version.richfaces}</version>
-                                    <classifier>${showcase.classifier}</classifier>
+                                    <version>5.0.0-SNAPSHOT</version>
+                                    <classifier>jbas71</classifier>
                                     <type>war</type>
                                     <destFileName>showcase.war</destFileName>
                                 </artifactItem>
@@ -119,6 +159,78 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>jbossas-managed-7-1</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.as</groupId>
+                    <artifactId>jboss-as-arquillian-container-managed</artifactId>
+                    <version>7.1.1.Final</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>unpack</id>
+                                <phase>process-test-classes</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>org.jboss.as</groupId>
+                                            <artifactId>jboss-as-dist</artifactId>
+                                            <version>7.1.1.Final</version>
+                                            <type>zip</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>${project.build.directory}</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <systemProperties>
+                                <arquillian.launch>jbossas-managed-7-1</arquillian.launch>
+                            </systemProperties>
+                            <environmentVariables>
+                                <JBOSS_HOME>${jboss7-1Home}</JBOSS_HOME>
+                            </environmentVariables>
+                        </configuration>
+                    </plugin>
+                    <!-- workaround for RF-11983-->
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy JBoss AS configuration</id>
+                                <phase>process-test-classes</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${jboss7-1Home}/standalone/configuration</outputDirectory>
+                                    <overwrite>true</overwrite>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/src/test/resources/jboss711Final</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>checkstyle</id>
             <activation>

@@ -112,5 +112,9 @@
         <property name="verbose">true</property>
         <property name="webdriverPortHost">4444</property>
     </extension>
+    
+    <extension qualifier="screenshooter">
+        <property name="takeOnEveryAction">true</property>
+    </extension>
 
 </arquillian>

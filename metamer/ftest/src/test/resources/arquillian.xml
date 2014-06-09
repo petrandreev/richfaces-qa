@@ -175,5 +175,9 @@ http://www.fsf.org. -->
     <extension qualifier="webdriver">
         <property name="browser">firefox</property>
     </extension>
+    
+    <extension qualifier="screenshooter">
+        <property name="takeOnEveryAction">true</property>
+    </extension>
 
 </arquillian>
