@@ -51,6 +51,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.openqa.selenium.support.FindBy;
 import org.richfaces.fragment.common.Event;
 import org.richfaces.fragment.common.Locations;
@@ -186,6 +187,7 @@ public abstract class AbstractWebDriverTest extends AbstractMetamerTest {
         // This will manually trigger arquillianAfterClass, if it was not invoked before.
         // This should at least close the browser window.
         if (!afterClassWasTriggered) {
+            afterClass();
             arquillianAfterClass();
         }
     }
@@ -197,20 +199,36 @@ public abstract class AbstractWebDriverTest extends AbstractMetamerTest {
 
     /**
      * Opens the tested page. If templates is not empty nor null, it appends url parameter with templates.
-     *
-     * @param templates templates that will be used for test, e.g. "red_div"
+     * @param actualTestMethod
      */
     @BeforeMethod(alwaysRun = true, dependsOnMethods = "configure")
-    public void loadPage() {
+    public void loadPage(Method actualTestMethod) {
         if (driver == null) {
             throw new SkipException("webDriver isn't initialized");
         }
+        reinitBrowserIfUnreachable(actualTestMethod);
         driver.manage().deleteAllCookies();
         driver.get(buildUrl(getTestUrl() + "?templates=" + template.toString()).toExternalForm());
         driverType = DriverType.getCurrentType(driver);
 
         // resize browser window to 1280x1024 or full screen
         driver.manage().window().setSize(new Dimension(1280, 1024));
+    }
+
+    private void reinitBrowserIfUnreachable(Method actualTestMethod) {
+        for (int i = 0; i < 5; i++) {
+            try {
+                driver.getWindowHandle();
+            } catch (UnreachableBrowserException ex) {
+                System.err.println("The browser was unreachable. Reinitializing the browser.");
+                try {
+                    arquillianBeforeClass();
+                    arquillianBeforeTest(actualTestMethod);
+                } catch (Exception ex1) {
+                    System.err.println(ex1);
+                }
+            }
+        }
     }
 
     protected Attributes<BasicAttributes> getBasicAttributes() {
