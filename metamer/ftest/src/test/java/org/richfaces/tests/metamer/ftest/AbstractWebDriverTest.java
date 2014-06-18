@@ -223,6 +223,7 @@ public abstract class AbstractWebDriverTest extends AbstractMetamerTest {
                 driver.getWindowHandle();
             } catch (UnreachableBrowserException ex) {
                 System.err.println("The browser was unreachable. Reinitializing the browser.");
+                System.out.println("The browser was unreachable. Reinitializing the browser.");
                 try {
                     arquillianBeforeClass();
                     arquillianBeforeTest(actualTestMethod);
