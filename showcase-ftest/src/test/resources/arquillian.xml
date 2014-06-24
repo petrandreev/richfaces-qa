@@ -25,6 +25,13 @@
             <property name="executionType">REMOTE</property>
         </protocol>
     </container>
+    
+    <container qualifier="wildfly-managed-8-1">
+        <configuration>
+            <property name="serverConfig">standalone.xml</property>
+            <property name="enableAssertions">false</property>
+        </configuration>
+    </container>
 
     <container qualifier="jbossas-managed-7-1">
         <configuration>
@@ -116,5 +123,9 @@
     <extension qualifier="screenshooter">
         <property name="takeOnEveryAction">true</property>
     </extension>
+    
+    <extension qualifier="reporter">
+        <property name="report">html</property>
+</extension>
 
 </arquillian>

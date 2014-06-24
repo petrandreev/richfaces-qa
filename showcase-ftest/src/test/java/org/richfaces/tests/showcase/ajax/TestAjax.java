@@ -46,9 +46,9 @@ public class TestAjax extends AbstractWebDriverTest {
         page.input.click();
         page.input.clear();
         String toWrite = "text";
-        for (char ch: toWrite.toCharArray()) {
-            Graphene.guardAjax(page.input).sendKeys(Character.toString(ch));
-        }
+//        for (char ch: toWrite.toCharArray()) {
+//            Graphene.guardAjax(page.input).sendKeys(Character.toString(ch));
+//        }
 
 
         Graphene.waitAjax()
@@ -77,5 +77,9 @@ public class TestAjax extends AbstractWebDriverTest {
                 .text()
                 .equalTo("x");
     }
-
+    
+    @Test(expectedExceptions = Exception.class)
+    public void testFooBar() throws Exception {
+        throw new Exception();
+    }
 }
