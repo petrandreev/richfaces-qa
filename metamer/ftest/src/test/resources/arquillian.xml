@@ -180,6 +180,21 @@ http://www.fsf.org. -->
         <property name="seleniumPort">8444</property>
         <property name="seleniumHost">localhost</property>
     </extension>
+    
+    <extension qualifier="screenshooter">
+        <property name="takeBeforeTest">true</property>
+        <property name="takeWhenTestFailed">true</property>
+        <property name="takeAfterTest">true</property>
+    </extension>
+    
+    <extension qualifier="reporter">
+        <property name="report">html5</property>
+        <property name="reportAfterEvery">suite</property>
+        <property name="reportAfterEvery">suite</property>
+        <property name="imageWidth">50</property>
+        <property name="imageHeight">50</property>
+        <property name="maxImageWidth">500</property>
+    </extension>
 
     <extension qualifier="webdriver">
         <property name="browser">firefox</property>

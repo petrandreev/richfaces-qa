@@ -304,6 +304,10 @@ public class MetamerPage {
             return o;
         }
 
+        @Override
+        public int getPrecedence() {
+            return 1;
+        }
     }
 
     private static class RequestTimeNotChangesWaitingInterceptor extends RequestTimeChangesWaitingInterceptor {

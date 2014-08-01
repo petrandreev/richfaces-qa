@@ -111,6 +111,18 @@
         <property name="remoteAddress">http://localhost:4444/wd/hub/</property>
         <property name="javascriptEnabled">true</property>
     </extension>
+    
+    <extension qualifier="screenshooter">
+        <property name="takeBeforeTest">true</property>
+        <property name="takeWhenTestFailed">true</property>
+        <property name="takeAfterTest">true</property>
+    </extension>
+    
+    <extension qualifier="reporter">
+        <property name="report">html5</property>
+        <property name="imageWidth">30</property>
+        <property name="imageHeight">30</property>
+    </extension>
 
     <extension qualifier="android">
         <property name="home">${android.sdk.home}</property>
