@@ -209,6 +209,8 @@ http://www.fsf.org. -->
 
     <extension qualifier="webdriver">
         <property name="browser">firefox</property>
+	<property name="remoteReusable">false</property>
+	<property name="remoteAddress">http://localhost:4444/wd/hub/</property>
     </extension>
 
 </arquillian>
