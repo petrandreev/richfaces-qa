@@ -33,6 +33,7 @@ import org.testng.annotations.Test;
 import org.jboss.arquillian.graphene.page.Page;
 import org.jboss.arquillian.graphene.page.interception.AjaxHalter;
 
+import static org.jboss.arquillian.graphene.halter.AjaxState.OPENED;
 import static org.jboss.test.selenium.support.url.URLUtils.buildUrl;
 
 /**
@@ -89,13 +90,13 @@ public class TestNestedAttachQueue extends AbstractAttachQueueTest {
         AjaxHalter.enable();
         getQueue().type("a");
         AjaxHalter handle = AjaxHalter.getHandleBlocking();
-        handle.opened();
+        handle.continueAfter(OPENED);
         getQueue().type("b");
-        handle.done();
+        handle.complete();
         getQueue().waitForChange("", page.getOutput1());
         assertEquals(page.getOutput1().getText(), "a");
         handle = AjaxHalter.getHandleBlocking();
-        handle.done();
+        handle.complete();
         getQueue().waitForChange("a", page.getOutput1());
         assertEquals(page.getOutput1().getText(), "ab");
     }
@@ -106,12 +107,10 @@ public class TestNestedAttachQueue extends AbstractAttachQueueTest {
 
         AjaxHalter.enable();
         getQueue().type("c");
-//        getQueue().fireEvent(1);
         AjaxHalter handle = AjaxHalter.getHandleBlocking();
-        handle.opened();
+        handle.continueAfter(OPENED);
         getQueue().type("d");
-//        getQueue().fireEvent(1);
-        handle.done();
+        handle.complete();
         try {
             getQueue().waitForChange("", page.getOutput1());
         } catch (Exception e) {
@@ -119,7 +118,7 @@ public class TestNestedAttachQueue extends AbstractAttachQueueTest {
         }
         assertEquals(page.getOutput1().getText(), "");
         handle = AjaxHalter.getHandleBlocking();
-        handle.done();
+        handle.complete();
         getQueue().waitForChange("", page.getOutput1());
         assertEquals(page.getOutput1().getText(), "cd");
     }
@@ -142,7 +141,7 @@ public class TestNestedAttachQueue extends AbstractAttachQueueTest {
         page.getInput2().sendKeys("b");
         getQueue().checkCounts(1, 1, 1, 0);//1 event from both inputs, 1 request and 0 dom updates
         AjaxHalter halter = AjaxHalter.getHandleBlocking();
-        halter.done();//complete request
+        halter.complete();//complete request
         getQueue().waitForChange("", page.getOutput2());
         getQueue().checkCounts(1, 1, 1, 1);//only 1 dom update should be triggered
         assertEquals(page.getOutput1().getText(), "", "The faster (lower delay) request haven't replaced the slower");

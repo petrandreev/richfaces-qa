@@ -24,7 +24,6 @@ package org.richfaces.tests.metamer.ftest.a4jQueue;
 
 import static org.richfaces.tests.metamer.ftest.a4jQueue.QueueAttributes.ignoreDupResponses;
 import static org.richfaces.tests.metamer.ftest.a4jQueue.QueueAttributes.rendered;
-import static org.richfaces.tests.metamer.ftest.a4jQueue.QueueAttributes.timeout;
 import static org.testng.Assert.assertEquals;
 
 import java.net.URL;
@@ -40,6 +39,7 @@ import org.richfaces.tests.metamer.ftest.AbstractWebDriverTest;
 import org.richfaces.tests.metamer.ftest.extension.configurator.use.annotation.UseWithField;
 import org.richfaces.tests.metamer.ftest.webdriver.Attributes;
 
+import static org.jboss.arquillian.graphene.halter.AjaxState.OPENED;
 import static org.jboss.test.selenium.support.url.URLUtils.buildUrl;
 import static org.richfaces.tests.metamer.ftest.extension.configurator.use.annotation.ValuesFrom.FROM_FIELD;
 import static org.testng.Assert.fail;
@@ -94,15 +94,15 @@ public class TestGlobalQueue extends AbstractWebDriverTest {
 
         queue.fireEvent(4);
         AjaxHalter handle = AjaxHalter.getHandleBlocking();
-        handle.opened();
-        handle.done();
+        handle.continueAfter(OPENED);
+        handle.complete();
 
         queue.checkCounts(4, 1, 1);
 
         queue.fireEvent(3);
         handle = AjaxHalter.getHandleBlocking();
-        handle.opened();
-        handle.done();
+        handle.continueAfter(OPENED);
+        handle.complete();
 
         queue.checkCounts(7, 2, 2);
 
@@ -127,35 +127,35 @@ public class TestGlobalQueue extends AbstractWebDriverTest {
         queue.checkCounts(1, 1, 0);
 
         AjaxHalter handle = AjaxHalter.getHandleBlocking();
-        handle.opened();
+        handle.continueAfter(OPENED);
 
         queue.fireEvent(1);
         queue.checkCounts(2, 1, 0);
 
-        handle.done();
+        handle.complete();
         queue.checkCounts(2, 2, 1);
 
         handle = AjaxHalter.getHandleBlocking();
-        handle.opened();
+        handle.continueAfter(OPENED);
         queue.fireEvent(4);
         queue.checkCounts(6, 2, 1);
 
-        handle.done();
+        handle.complete();
         queue.checkCounts(6, 3, 2);
 
         handle = AjaxHalter.getHandleBlocking();
-        handle.opened();
+        handle.continueAfter(OPENED);
         queue.fireEvent(1);
         queue.checkCounts(7, 3, 2);
 
-        handle.done();
+        handle.complete();
         queue.checkCounts(7, 4, 3);
 
         handle = AjaxHalter.getHandleBlocking();
-        handle.opened();
+        handle.continueAfter(OPENED);
         queue.checkCounts(7, 4, 3);
 
-        handle.done();
+        handle.complete();
         queue.checkCounts(7, 4, 4);
 
         AjaxHalter.disable();
@@ -182,13 +182,13 @@ public class TestGlobalQueue extends AbstractWebDriverTest {
         AjaxHalter.enable();
         queue.type("a");
         AjaxHalter handle = AjaxHalter.getHandleBlocking();
-        handle.opened();
+        handle.continueAfter(OPENED);
         queue.type("b");
-        handle.done();
+        handle.complete();
         queue.waitForChange("", queue.getRepeatedTextElement());
         assertEquals(queue.getRepeatedText(), "a");
         handle = AjaxHalter.getHandleBlocking();
-        handle.done();
+        handle.complete();
         queue.waitForChange("a", queue.getRepeatedTextElement());
         assertEquals(queue.getRepeatedText(), "ab");
     }
@@ -200,9 +200,9 @@ public class TestGlobalQueue extends AbstractWebDriverTest {
         AjaxHalter.enable();
         queue.type("c");
         AjaxHalter handle = AjaxHalter.getHandleBlocking();
-        handle.opened();
+        handle.continueAfter(OPENED);
         queue.type("d");
-        handle.done();
+        handle.complete();
 
         try {
             queue.waitForChange("", queue.getRepeatedTextElement());
@@ -214,7 +214,7 @@ public class TestGlobalQueue extends AbstractWebDriverTest {
         assertEquals(queue.getRepeatedText(), "");
 
         handle = AjaxHalter.getHandleBlocking();
-        handle.done();
+        handle.complete();
 
         queue.waitForChange("", queue.getRepeatedTextElement());
         assertEquals(queue.getRepeatedText(), "cd");

@@ -91,9 +91,9 @@ public class TestFormQueue extends AbstractWebDriverTest {
         queueA.fireEvent(Input.SECOND, 3);
 
         AjaxHalter halter = AjaxHalter.getHandleBlocking();
-        halter.done();
+        halter.complete();
         halter = AjaxHalter.getHandleBlocking();
-        halter.done();
+        halter.complete();
 
         queueA.checkTimes(Input.SECOND, DELAY_A);
     }
@@ -125,11 +125,11 @@ public class TestFormQueue extends AbstractWebDriverTest {
 
         AjaxHalter halter = AjaxHalter.getHandleBlocking();
         queueA.checkCounts(2, 3, 1, 0);
-        halter.done();
+        halter.complete();
         queueA.checkCounts(2, 3, 2, 1);
         halter = AjaxHalter.getHandleBlocking();
         queueA.checkCounts(2, 3, 2, 1);
-        halter.done();
+        halter.complete();
         queueA.checkCounts(2, 3, 2, 2);
     }
 
@@ -167,13 +167,13 @@ public class TestFormQueue extends AbstractWebDriverTest {
         queueB.fireEvent(Input.SECOND, 1);
 
         AjaxHalter halter = AjaxHalter.getHandleBlocking();
-        halter.done();
+        halter.complete();
         halter = AjaxHalter.getHandleBlocking();
-        halter.done();
+        halter.complete();
         halter = AjaxHalter.getHandleBlocking();
-        halter.done();
+        halter.complete();
         halter = AjaxHalter.getHandleBlocking();
-        halter.done();
+        halter.complete();
 
         queueB.checkTimes(Input.SECOND, DELAY_B);
 
@@ -215,17 +215,17 @@ public class TestFormQueue extends AbstractWebDriverTest {
         queueB.checkCounts(1, 1, 0, 0);
 
         AjaxHalter halter = AjaxHalter.getHandleBlocking();
-        halter.done();
+        halter.complete();
         queueA.checkCounts(1, 1, 2, 1);
         halter = AjaxHalter.getHandleBlocking();
-        halter.done();
+        halter.complete();
         queueA.checkCounts(1, 1, 2, 2);
         queueB.checkCounts(1, 1, 1, 0);
         halter = AjaxHalter.getHandleBlocking();
-        halter.done();
+        halter.complete();
         halter = AjaxHalter.getHandleBlocking();
         queueB.checkCounts(1, 1, 2, 1);
-        halter.done();
+        halter.complete();
 
         queueA.checkCounts(1, 1, 2, 2);
         queueB.checkCounts(1, 1, 2, 2);

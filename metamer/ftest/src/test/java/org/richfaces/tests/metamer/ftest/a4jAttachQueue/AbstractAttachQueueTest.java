@@ -91,13 +91,13 @@ public abstract class AbstractAttachQueueTest extends AbstractWebDriverTest {
         AjaxHalter halter = AjaxHalter.getHandleBlocking();
         queue.checkCounts(4, 0, 1, 0);
 
-        halter.done();
+        halter.complete();
         queue.checkCounts(4, 0, 2, 1);
 
         halter = AjaxHalter.getHandleBlocking();
         queue.checkCounts(4, 0, 2, 1);
 
-        halter.done();
+        halter.complete();
         queue.checkCounts(4, 0, 2, 2);
     }
 
@@ -110,9 +110,9 @@ public abstract class AbstractAttachQueueTest extends AbstractWebDriverTest {
         queue.fireEvent(SECOND, 1);
 
         AjaxHalter halter = AjaxHalter.getHandleBlocking();
-        halter.done();
+        halter.complete();
         halter = AjaxHalter.getHandleBlocking();
-        halter.done();
+        halter.complete();
 
         queue.checkTimes(SECOND, DELAY_B);
         queue.checkNoDelayBetweenEvents();
