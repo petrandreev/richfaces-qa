@@ -87,6 +87,9 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
         assertNotVisible(page.getGroup(), "Menu group \"Save As...\" should not be visible on the page.");
 
         assertNotVisible(page.getFileMenuList(), "Menu should not be expanded.");
+        Actions builder = new Actions(driver);
+        builder.moveToElement(page.getTarget1()).perform();
+        waiting(300);
         guardNoRequest(getCurrentMenu()).advanced().show(page.getTarget1());
         assertVisible(page.getFileMenuList(), "Menu should be expanded.");
 
@@ -98,7 +101,7 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
 
         assertNotVisible(page.getGroupList(), "Submenu should not be expanded.");
 
-        Actions builder = new Actions(driver);
+        builder = new Actions(driver);
         builder.moveToElement(getCurrentMenu().advanced().getItemsElements().get(3)).perform();
         waiting(300);
         assertVisible(page.getGroupList(), "Submenu should be expanded.");
@@ -200,6 +203,7 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
         // ajax
         dropDownMenuAttributes.set(DropDownMenuAttributes.mode, "ajax");
         getCurrentMenu().advanced().show(page.getTarget1());
+        waiting(100);
         guardAjax(getCurrentMenu().advanced().getItemsElements().get(0)).click();
         assertEquals(page.getOutput().getText(), "New", "Menu action was not performed.");
 
