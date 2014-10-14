@@ -233,4 +233,9 @@ public class TestDropDownMenuTopMenu extends AbstractDropDownMenuTest {
     public void testVerticalOffset() {
         super.testVerticalOffset();
     }
+
+    @Override
+    public String getTestClassName() {
+        return this.getClass().getName();
+    }
 }
