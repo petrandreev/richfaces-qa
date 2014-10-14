@@ -90,8 +90,7 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
 
         assertNotVisible(page.getFileMenuList(), "Menu should not be expanded.");
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",1);
-        Actions builder = new Actions(driver);
-        builder.moveToElement(page.getTarget1()).perform();
+        getCurrentMenu().advanced().show(page.getTarget1());
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",2);
         guardNoRequest(getCurrentMenu()).advanced().show(page.getTarget1());
         assertVisible(page.getFileMenuList(), "Menu should be expanded.");
@@ -104,10 +103,9 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
 
         assertNotVisible(page.getGroupList(), "Submenu should not be expanded.");
 
-        builder = new Actions(driver);
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",3);
-        builder.moveToElement(getCurrentMenu().advanced().getItemsElements().get(3)).perform();
-        waiting(300);
+        guardNoRequest(new Actions(driver).moveToElement(getCurrentMenu().advanced().getItemsElements().get(3)).build())
+            .perform();
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",4);
         assertVisible(page.getGroupList(), "Submenu should be expanded.");
 
