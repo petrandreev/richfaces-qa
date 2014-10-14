@@ -101,6 +101,8 @@ public abstract class AbstractWebDriverTest extends AbstractMetamerTest {
     @Page
     private MetamerPage metamerPage;
 
+    private MetamerScreenShotLoggingUtils screenshotLogger = MetamerScreenShotLoggingUtils.getInstance();
+
     protected DriverType driverType;
 
     private Boolean afterClassWasTriggered = Boolean.FALSE;
@@ -233,6 +235,10 @@ public abstract class AbstractWebDriverTest extends AbstractMetamerTest {
 
     protected MetamerPage getMetamerPage() {
         return metamerPage;
+    }
+
+    public MetamerScreenShotLoggingUtils getScreenshotLogger() {
+        return screenshotLogger;
     }
 
     /**
