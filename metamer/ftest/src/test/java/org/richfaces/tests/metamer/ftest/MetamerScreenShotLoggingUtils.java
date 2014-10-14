@@ -20,6 +20,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  */
 public class MetamerScreenShotLoggingUtils {
 
+    protected File mavenProjectBuildDirectory = new File(System.getProperty("maven.project.build.directory", "./target/"));
+    protected File infoOutputDir = new File(mavenProjectBuildDirectory, "info");
+
     private static MetamerScreenShotLoggingUtils instance;
 
     public static synchronized MetamerScreenShotLoggingUtils getInstance() {
@@ -28,9 +31,6 @@ public class MetamerScreenShotLoggingUtils {
         }
         return instance;
     }
-
-    protected File mavenProjectBuildDirectory = new File(System.getProperty("maven.project.build.directory", "./target/"));
-    protected File infoOutputDir = new File(mavenProjectBuildDirectory, "info");
 
     /**
      * This method make screenshot to target location. It will be in info in target under testClassName directory and each
