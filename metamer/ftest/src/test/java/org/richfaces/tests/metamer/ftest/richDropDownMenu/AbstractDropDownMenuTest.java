@@ -96,7 +96,7 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
 
         assertPresent(page.getGroup(), "Menu group \"Save As...\" should be present on the page.");
         assertVisible(page.getGroup(), "Menu group \"Save As...\" should be visible on the page.");
-        
+
         assertPresent(page.getMenuItem41(), "Menu item \"Save\" should be present on the page.");
         assertNotVisible(page.getMenuItem41(), "Menu item \"Save\" should not be visible on the page.");
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",3);
