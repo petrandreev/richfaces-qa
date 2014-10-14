@@ -91,21 +91,23 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
         assertNotVisible(page.getFileMenuList(), "Menu should not be expanded.");
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",1);
         guardNoRequest(getCurrentMenu()).advanced().show(page.getTarget1());
-        assertVisible(page.getFileMenuList(), "Menu should be expanded.");
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",2);
+        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",3);
+        assertVisible(page.getFileMenuList(), "Menu should be expanded.");
+        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",4);
 
         assertPresent(page.getGroup(), "Menu group \"Save As...\" should be present on the page.");
         assertVisible(page.getGroup(), "Menu group \"Save As...\" should be visible on the page.");
 
         assertPresent(page.getMenuItem41(), "Menu item \"Save\" should be present on the page.");
         assertNotVisible(page.getMenuItem41(), "Menu item \"Save\" should not be visible on the page.");
-        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",3);
+        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",5);
         assertNotVisible(page.getGroupList(), "Submenu should not be expanded.");
 
-        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",4);
+        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",6);
         guardNoRequest(new Actions(driver).moveToElement(getCurrentMenu().advanced().getItemsElements().get(3)).build())
             .perform();
-        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",5);
+        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",7);
         assertVisible(page.getGroupList(), "Submenu should be expanded.");
 
         assertPresent(page.getMenuItem41(), "Menu item \"Save\" should be present on the page.");
