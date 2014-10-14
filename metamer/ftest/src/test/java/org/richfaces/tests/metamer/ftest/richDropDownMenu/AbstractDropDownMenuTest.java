@@ -48,6 +48,7 @@ import org.richfaces.tests.metamer.ftest.AbstractWebDriverTest;
 import org.richfaces.tests.metamer.ftest.richContextMenu.ContextMenuSimplePage;
 import org.richfaces.tests.metamer.ftest.webdriver.Attributes;
 
+
 /**
  * Abstract test used for testing both drop down menus - top and side
  *
@@ -96,10 +97,10 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
         assertNotVisible(page.getMenuItem41(), "Menu item \"Save\" should not be visible on the page.");
 
         assertNotVisible(page.getGroupList(), "Submenu should not be expanded.");
-        guardNoRequest(
-            new Actions(driver).moveToElement(
-                getCurrentMenu().advanced().getItemsElements().get(3)).build())
-            .perform();
+
+        Actions builder = new Actions(driver);
+        builder.moveToElement(getCurrentMenu().advanced().getItemsElements().get(3)).perform();
+        waiting(300);
         assertVisible(page.getGroupList(), "Submenu should be expanded.");
 
         assertPresent(page.getMenuItem41(), "Menu item \"Save\" should be present on the page.");
