@@ -74,7 +74,7 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
     }
 
     private void updateDropDownMenuInvoker() {
-        getCurrentMenu().advanced().setShowEvent(Event.CLICK);
+        getCurrentMenu().advanced().setShowEvent(Event.MOUSEOVER);
     }
 
     public void updateDropDownMenuInvokerToClick(){
