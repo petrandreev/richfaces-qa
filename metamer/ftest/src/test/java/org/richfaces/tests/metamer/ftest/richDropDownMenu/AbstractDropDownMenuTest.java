@@ -88,7 +88,7 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
 
     public void testInit() {
         page.fullPageRefresh();
-        updateDropDownMenuInvokerToClick();
+        updateDropDownMenuInvoker();
         getAttributes().set(DropDownMenuAttributes.hideDelay, 3000);
         assertPresent(page.getFileMenu(), "Drop down menu \"File\" should be present on the page.");
         assertVisible(page.getFileMenu(), "Drop down menu \"File\" should be visible on the page.");
@@ -97,7 +97,7 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
         assertNotVisible(page.getGroup(), "Menu group \"Save As...\" should not be visible on the page.");
 
         assertNotVisible(page.getFileMenuList(), "Menu should not be expanded.");
-        page.getTarget1().click();
+        guardNoRequest(getCurrentMenu()).advanced().show(page.getTarget1());
         assertVisible(page.getFileMenuList(), "Menu should be expanded.");
 
         assertPresent(page.getGroup(), "Menu group \"Save As...\" should be present on the page.");
@@ -107,7 +107,7 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
         assertNotVisible(page.getMenuItem41(), "Menu item \"Save\" should not be visible on the page.");
         assertNotVisible(page.getGroupList(), "Submenu should not be expanded.");
 
-        guardNoRequest(new Actions(driver).click(getCurrentMenu().advanced().getItemsElements().get(3)).build())
+        guardNoRequest(new Actions(driver).moveToElement(getCurrentMenu().advanced().getItemsElements().get(3)).build())
             .perform();
 
         assertVisible(page.getGroupList(), "Submenu should be expanded.");
