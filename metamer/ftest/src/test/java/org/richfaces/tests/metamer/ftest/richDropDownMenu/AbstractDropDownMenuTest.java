@@ -221,10 +221,10 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
         dropDownMenuAttributes.set(DropDownMenuAttributes.mode, "server");
         page.getTarget1().click();
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testMode", screenShotCounter++);
-        guardHttp(new Actions(driver).click(getCurrentMenu().advanced().getItemsElements().get(8)).build())
+        guardHttp(new Actions(driver).click(getCurrentMenu().advanced().getItemsElements().get(1)).build())
         .perform();
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testMode", screenShotCounter++);
-        assertEquals(page.getOutput().getText(), "Close", "Menu action was not performed.");
+        assertEquals(page.getOutput().getText(), "Open", "Menu action was not performed.");
 
         // client
         dropDownMenuAttributes.set(DropDownMenuAttributes.mode, "client");
@@ -236,8 +236,8 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
         dropDownMenuAttributes.set(DropDownMenuAttributes.mode, "server");
         getCurrentMenu().advanced().show(page.getTarget1());
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testMode", screenShotCounter++);
-        guardHttp(getCurrentMenu().advanced().getItemsElements().get(8)).click();
-        assertEquals(page.getOutput().getText(), "Close", "Menu action was not performed.");
+        guardHttp(getCurrentMenu().advanced().getItemsElements().get(1)).click();
+        assertEquals(page.getOutput().getText(), "Open", "Menu action was not performed.");
     }
 
     public void testDisabled() {
