@@ -45,12 +45,8 @@ import org.richfaces.fragment.common.Locations;
 import org.richfaces.fragment.common.Utils;
 import org.richfaces.fragment.dropDownMenu.RichFacesDropDownMenu;
 import org.richfaces.tests.metamer.ftest.AbstractWebDriverTest;
-import org.richfaces.tests.metamer.ftest.MetamerAttributes;
-import org.richfaces.tests.metamer.ftest.attributes.AttributeEnum;
 import org.richfaces.tests.metamer.ftest.richContextMenu.ContextMenuSimplePage;
 import org.richfaces.tests.metamer.ftest.webdriver.Attributes;
-import org.richfaces.tests.metamer.ftest.webdriver.MetamerPage;
-
 
 /**
  * Abstract test used for testing both drop down menus - top and side
@@ -205,37 +201,30 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
     }
 
     public void testMode() {
-        int screenShotCounter=1;
         updateDropDownMenuInvokerToClick();
         // ajax
         dropDownMenuAttributes.set(DropDownMenuAttributes.mode, "ajax");
         getAttributes().set(DropDownMenuAttributes.hideDelay, 2000);
         page.getTarget1().click();
-        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testMode", screenShotCounter++);
         guardAjax(new Actions(driver).click(getCurrentMenu().advanced().getItemsElements().get(0)).build())
         .perform();
-        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testMode", screenShotCounter++);
         assertEquals(page.getOutput().getText(), "New", "Menu action was not performed.");
 
         // server
         dropDownMenuAttributes.set(DropDownMenuAttributes.mode, "server");
         page.getTarget1().click();
-        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testMode", screenShotCounter++);
         guardHttp(new Actions(driver).click(getCurrentMenu().advanced().getItemsElements().get(1)).build())
         .perform();
-        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testMode", screenShotCounter++);
         assertEquals(page.getOutput().getText(), "Open", "Menu action was not performed.");
 
         // client
         dropDownMenuAttributes.set(DropDownMenuAttributes.mode, "client");
         getCurrentMenu().advanced().show(page.getTarget1());
-        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testMode", screenShotCounter++);
         guardNoRequest(getCurrentMenu().advanced().getItemsElements().get(0)).click();
 
         // null
         dropDownMenuAttributes.set(DropDownMenuAttributes.mode, "server");
         getCurrentMenu().advanced().show(page.getTarget1());
-        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testMode", screenShotCounter++);
         guardHttp(getCurrentMenu().advanced().getItemsElements().get(1)).click();
         assertEquals(page.getOutput().getText(), "Open", "Menu action was not performed.");
     }
