@@ -45,8 +45,11 @@ import org.richfaces.fragment.common.Locations;
 import org.richfaces.fragment.common.Utils;
 import org.richfaces.fragment.dropDownMenu.RichFacesDropDownMenu;
 import org.richfaces.tests.metamer.ftest.AbstractWebDriverTest;
+import org.richfaces.tests.metamer.ftest.MetamerAttributes;
+import org.richfaces.tests.metamer.ftest.attributes.AttributeEnum;
 import org.richfaces.tests.metamer.ftest.richContextMenu.ContextMenuSimplePage;
 import org.richfaces.tests.metamer.ftest.webdriver.Attributes;
+import org.richfaces.tests.metamer.ftest.webdriver.MetamerPage;
 
 
 /**
@@ -86,7 +89,7 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
     public void testInit() {
         page.fullPageRefresh();
         updateDropDownMenuInvokerToClick();
-        getCurrentMenu().advanced().setHideDelay(1000);
+        getAttributes().set(DropDownMenuAttributes.hideDelay, 3000);
         assertPresent(page.getFileMenu(), "Drop down menu \"File\" should be present on the page.");
         assertVisible(page.getFileMenu(), "Drop down menu \"File\" should be visible on the page.");
 
