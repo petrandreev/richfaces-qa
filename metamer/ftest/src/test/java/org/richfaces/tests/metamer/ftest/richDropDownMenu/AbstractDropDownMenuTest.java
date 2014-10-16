@@ -71,11 +71,11 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
     }
 
     private void updateDropDownMenuInvoker() {
-        getCurrentMenu().advanced().setShowEvent(Event.MOUSEOVER);
+        getCurrentMenu().advanced().setShowEvent(Event.CLICK);
     }
 
-    private void updateDropDownMenuDelay(){
-        getCurrentMenu().advanced().setHideDelay(10000);
+    public void updateDropDownMenuInvokerToClick(){
+        getCurrentMenu().advanced().setShowEvent(Event.CLICK);
     }
 
     public abstract String getTestClassName();
@@ -85,8 +85,8 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
 
     public void testInit() {
         page.fullPageRefresh();
-        updateDropDownMenuInvoker();
-        updateDropDownMenuDelay();
+        updateDropDownMenuInvokerToClick();
+        getCurrentMenu().advanced().setHideDelay(1000);
         assertPresent(page.getFileMenu(), "Drop down menu \"File\" should be present on the page.");
         assertVisible(page.getFileMenu(), "Drop down menu \"File\" should be visible on the page.");
 
@@ -95,8 +95,7 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
 
         assertNotVisible(page.getFileMenuList(), "Menu should not be expanded.");
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",1);
-        guardNoRequest(getCurrentMenu()).advanced().show(page.getTarget1());
-        waiting(1000);
+        page.getTarget1().click();
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",2);
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",3);
         assertVisible(page.getFileMenuList(), "Menu should be expanded.");
