@@ -209,7 +209,7 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
         updateDropDownMenuInvokerToClick();
         // ajax
         dropDownMenuAttributes.set(DropDownMenuAttributes.mode, "ajax");
-        getAttributes().set(DropDownMenuAttributes.hideDelay, 1000);
+        getAttributes().set(DropDownMenuAttributes.hideDelay, 2000);
         page.getTarget1().click();
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testMode", screenShotCounter++);
         guardAjax(new Actions(driver).click(getCurrentMenu().advanced().getItemsElements().get(0)).build())
