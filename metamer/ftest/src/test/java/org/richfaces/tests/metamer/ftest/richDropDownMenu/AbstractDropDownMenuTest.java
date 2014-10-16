@@ -77,7 +77,7 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
         getCurrentMenu().advanced().setShowEvent(Event.MOUSEOVER);
     }
 
-    public void updateDropDownMenuInvokerToClick(){
+    private void updateDropDownMenuInvokerToClick(){
         getCurrentMenu().advanced().setShowEvent(Event.CLICK);
     }
 
@@ -206,12 +206,13 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
 
     public void testMode() {
         int screenShotCounter=1;
-        updateDropDownMenuInvoker();
+        updateDropDownMenuInvokerToClick();
         // ajax
         dropDownMenuAttributes.set(DropDownMenuAttributes.mode, "ajax");
-        getCurrentMenu().advanced().show(page.getTarget1());
+        page.getTarget1().click();
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testMode", screenShotCounter++);
-        guardAjax(getCurrentMenu().advanced().getItemsElements().get(0)).click();
+        guardAjax(new Actions(driver).click(getCurrentMenu().advanced().getItemsElements().get(0)).build())
+        .perform();
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testMode", screenShotCounter++);
         assertEquals(page.getOutput().getText(), "New", "Menu action was not performed.");
 
