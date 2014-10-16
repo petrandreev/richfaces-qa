@@ -74,6 +74,10 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
         getCurrentMenu().advanced().setShowEvent(Event.MOUSEOVER);
     }
 
+    private void updateDropDownMenuDelay(){
+        getCurrentMenu().advanced().setHideDelay(delays[2]);
+    }
+
     public abstract String getTestClassName();
 
     @Page
@@ -82,6 +86,7 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
     public void testInit() {
         page.fullPageRefresh();
         updateDropDownMenuInvoker();
+        updateDropDownMenuDelay();
         assertPresent(page.getFileMenu(), "Drop down menu \"File\" should be present on the page.");
         assertVisible(page.getFileMenu(), "Drop down menu \"File\" should be visible on the page.");
 
@@ -91,24 +96,21 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
         assertNotVisible(page.getFileMenuList(), "Menu should not be expanded.");
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",1);
         guardNoRequest(getCurrentMenu()).advanced().show(page.getTarget1());
-        waiting(4000);
+
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",2);
-        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",3);
         assertVisible(page.getFileMenuList(), "Menu should be expanded.");
-        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",4);
 
         assertPresent(page.getGroup(), "Menu group \"Save As...\" should be present on the page.");
         assertVisible(page.getGroup(), "Menu group \"Save As...\" should be visible on the page.");
 
         assertPresent(page.getMenuItem41(), "Menu item \"Save\" should be present on the page.");
         assertNotVisible(page.getMenuItem41(), "Menu item \"Save\" should not be visible on the page.");
-        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",5);
         assertNotVisible(page.getGroupList(), "Submenu should not be expanded.");
 
-        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",6);
+        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",3);
         guardNoRequest(new Actions(driver).moveToElement(getCurrentMenu().advanced().getItemsElements().get(3)).build())
             .perform();
-        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",7);
+        getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testInit",4);
         assertVisible(page.getGroupList(), "Submenu should be expanded.");
 
         assertPresent(page.getMenuItem41(), "Menu item \"Save\" should be present on the page.");
