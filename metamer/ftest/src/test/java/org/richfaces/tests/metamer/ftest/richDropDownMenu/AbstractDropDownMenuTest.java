@@ -216,7 +216,7 @@ public abstract class AbstractDropDownMenuTest extends AbstractWebDriverTest {
         .perform();
         getScreenshotLogger().makeScreenShot(driver, getTestClassName(), "testMode", screenShotCounter++);
         assertEquals(page.getOutput().getText(), "New", "Menu action was not performed.");
-        
+
         // server
         dropDownMenuAttributes.set(DropDownMenuAttributes.mode, "server");
         page.getTarget1().click();
