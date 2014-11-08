@@ -1,27 +1,24 @@
-/**
- * *****************************************************************************
- * JBoss, Home of Professional Open Source Copyright 2010-2014, Red Hat, Inc.
- * and individual contributors by the
+/*******************************************************************************
+ * JBoss, Home of Professional Open Source
+ * Copyright 2010-2014, Red Hat, Inc. and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
  *
- * @authors tag. See the copyright.txt in the distribution for a full listing of
- * individual contributors.
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * This is free software; you can redistribute it and/or modify it under the
- * terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation; either version 2.1 of the License, or (at your option)
- * any later version.
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  *
- * This software is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this software; if not, write to the Free Software Foundation,
- * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA, or see the FSF
- * site: http://www.fsf.org.
- * *****************************************************************************
- */
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+ *******************************************************************************/
 package org.richfaces.tests.metamer.ftest;
 
 import static java.text.MessageFormat.format;
@@ -77,7 +74,9 @@ import org.richfaces.tests.metamer.ftest.extension.configurator.Configurator;
 import org.richfaces.tests.metamer.ftest.extension.configurator.config.Config;
 import org.richfaces.tests.metamer.ftest.extension.configurator.transformer.DataProviderTestTransformer;
 import org.richfaces.tests.metamer.ftest.webdriver.Attributes;
+import org.richfaces.tests.metamer.ftest.webdriver.AttributesImpl;
 import org.richfaces.tests.metamer.ftest.webdriver.MetamerPage;
+import org.richfaces.tests.metamer.ftest.webdriver.UnsafeAttributes;
 import org.richfaces.tests.metamer.ftest.webdriver.utils.StopWatch;
 import org.richfaces.tests.metamer.ftest.webdriver.utils.StringEqualsWrapper;
 import org.testng.SkipException;
@@ -947,11 +946,11 @@ public abstract class AbstractWebDriverTest extends AbstractMetamerTest {
     }
 
     protected <T extends AttributeEnum> Attributes<T> getAttributes(String attributesTableId) {
-        return Attributes.<T>getAttributesFor(getFutureDriver(), attributesTableId);
+        return AttributesImpl.<T>getAttributesFor(getFutureDriver(), attributesTableId);
     }
 
     protected UnsafeAttributes getUnsafeAttributes(String attributesTableId) {
-        return new UnsafeAttributes(getFutureDriver(), attributesTableId);
+        return new UnsafeAttributesImpl(getFutureDriver(), attributesTableId);
     }
 
     protected <T extends AttributeEnum> Attributes<T> getAttributes() {
@@ -1148,9 +1147,9 @@ public abstract class AbstractWebDriverTest extends AbstractMetamerTest {
         WebElement perform();
     }
 
-    protected class UnsafeAttributes<T extends AttributeEnum> extends Attributes<T> {
+    protected class UnsafeAttributesImpl<T extends AttributeEnum> extends AttributesImpl<T> implements UnsafeAttributes<T> {
 
-        public UnsafeAttributes(FutureTarget<WebDriver> driver, String attributesID) {
+        public UnsafeAttributesImpl(FutureTarget<WebDriver> driver, String attributesID) {
             super(driver, attributesID);
         }
 
@@ -1182,7 +1181,7 @@ public abstract class AbstractWebDriverTest extends AbstractMetamerTest {
         }
     }
 
-    protected static final class FutureWebElement {
+    public static final class FutureWebElement {
 
         private FutureWebElement() {
         }
