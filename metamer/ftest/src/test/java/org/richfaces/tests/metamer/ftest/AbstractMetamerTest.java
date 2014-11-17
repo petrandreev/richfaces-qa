@@ -51,6 +51,7 @@ import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.javaee6.ParamValueType;
 import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.richfaces.tests.metamer.TemplatesList;
+import org.richfaces.tests.metamer.ftest.extension.configurator.skip.JSFDetector;
 import org.richfaces.tests.metamer.ftest.extension.configurator.templates.annotation.Templates;
 
 import com.google.common.io.Files;
@@ -94,6 +95,7 @@ public abstract class AbstractMetamerTest extends Arquillian {
     @OverProtocol("Servlet 3.0")
     public static WebArchive createTestArchive() throws IOException, URISyntaxException {
         WebArchive war = createWarFromZipFile();
+        JSFDetector.getInstance().detect(war);
         /*
          * If value on system property "org.richfaces.resourceOptimization.enabled" is set to true, modify context-params in web.xml.
          * For more info see https://issues.jboss.org/browse/RFPL-1682

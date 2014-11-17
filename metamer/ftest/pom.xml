@@ -94,6 +94,13 @@ FSF site: http://www.fsf.org. -->
             <artifactId>operadriver</artifactId>
         </dependency>
 
+        <!-- Using some of the classes in Configurators -->
+        <dependency>
+            <groupId>org.richfaces.tests</groupId>
+            <artifactId>richfaces-qa-maven-plugin</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
         <!-- TestNG listeners for better console output -->
         <dependency>
             <groupId>org.richfaces.tests</groupId>
@@ -177,6 +184,7 @@ FSF site: http://www.fsf.org. -->
                         </property>
                     </properties>
                     <systemPropertyVariables>
+                        <project.build.directory>${project.build.directory}</project.build.directory>
                         <arquillian.container.jbossas.7-1.node0>${arquillian.container.jbossas.7-1.node0}</arquillian.container.jbossas.7-1.node0>
                         <arquillian.container.jbossas.7-1.jvm.args>${arquillian.container.jbossas.7-1.jvm.args}</arquillian.container.jbossas.7-1.jvm.args>
                         <arquillian.container.all.jvm.args>${arquillian.container.all.jvm.args}</arquillian.container.all.jvm.args>
