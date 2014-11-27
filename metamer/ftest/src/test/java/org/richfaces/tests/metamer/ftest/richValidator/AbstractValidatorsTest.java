@@ -121,6 +121,7 @@ public abstract class AbstractValidatorsTest extends AbstractWebDriverTest {
          */
         size
     }
+
     protected Map<ID, String> messages = new EnumMap<AbstractValidatorsTest.ID, String>(AbstractValidatorsTest.ID.class);
     private Map<ID, Object> wrongValue = new EnumMap<AbstractValidatorsTest.ID, Object>(AbstractValidatorsTest.ID.class);
 
@@ -211,7 +212,9 @@ public abstract class AbstractValidatorsTest extends AbstractWebDriverTest {
 
         submitAjax();
 
-        Graphene.waitGui().until().element(page.getMsgAssertTrue()).text().equalTo(messages.get(ID.assertTrue));
+        // Use waitModel, because sometimes request take a little bit longer, when its finished once then all error messages are
+        // visible
+        Graphene.waitModel().until().element(page.getMsgAssertTrue()).text().equalTo(messages.get(ID.assertTrue));
         Graphene.waitGui().until().element(page.getMsgAssertFalse()).text().equalTo(messages.get(ID.assertFalse));
         Graphene.waitGui().until().element(page.getMsgDecimalMinMax()).text().equalTo(messages.get(ID.decimalMinMax));
         Graphene.waitGui().until().element(page.getMsgDigits()).text().equalTo(messages.get(ID.digits));
@@ -227,10 +230,10 @@ public abstract class AbstractValidatorsTest extends AbstractWebDriverTest {
             // regExp validator isn't present in JSR303 validation
             Graphene.waitGui().until().element(page.getMsgRegexp()).text().equalTo(messages.get(ID.regexp));
         }
-        Graphene.waitGui().until().element(page.getMsgPast()).text().equalTo(messages.get(ID.past));
-        Graphene.waitGui().until().element(page.getMsgFuture()).text().equalTo(messages.get(ID.future));
         Graphene.waitGui().until().element(page.getMsgStringSize()).text().equalTo(messages.get(ID.stringSize));
         Graphene.waitGui().until().element(page.getMsgSize()).text().equalTo(messages.get(ID.size));
+        Graphene.waitGui().until().element(page.getMsgPast()).text().equalTo(messages.get(ID.past));
+        Graphene.waitGui().until().element(page.getMsgFuture()).text().equalTo(messages.get(ID.future));
     }
 
     protected void submitAjax() {
