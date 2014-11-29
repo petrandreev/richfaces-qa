@@ -73,6 +73,13 @@ import org.richfaces.tests.metamer.ftest.attributes.AttributeEnum;
 import org.richfaces.tests.metamer.ftest.extension.configurator.Configurator;
 import org.richfaces.tests.metamer.ftest.extension.configurator.config.Config;
 import org.richfaces.tests.metamer.ftest.extension.configurator.transformer.DataProviderTestTransformer;
+import org.richfaces.tests.metamer.ftest.extension.tester.basic.BasicTestChain;
+import org.richfaces.tests.metamer.ftest.extension.tester.basic.BasicTestChain.TestResourcesProvider;
+import org.richfaces.tests.metamer.ftest.extension.tester.basic.BasicTestChainImpl;
+import org.richfaces.tests.metamer.ftest.extension.tester.events.EventsOrderTestChain;
+import org.richfaces.tests.metamer.ftest.extension.tester.events.EventsOrderTestChainImpl;
+import org.richfaces.tests.metamer.ftest.extension.tester.events.TriggerSingleEventTestChain;
+import org.richfaces.tests.metamer.ftest.extension.tester.events.TriggerSingleEventTestChainImpl;
 import org.richfaces.tests.metamer.ftest.webdriver.Attributes;
 import org.richfaces.tests.metamer.ftest.webdriver.AttributesImpl;
 import org.richfaces.tests.metamer.ftest.webdriver.MetamerPage;
@@ -1292,5 +1299,35 @@ public abstract class AbstractWebDriverTest extends AbstractMetamerTest {
                     lastReturnedString);
             }
         }
+    }
+
+    private final TestResourcesProvider testResourcesProvider = new TestResourcesProvider() {
+
+        @Override
+        public <T extends AttributeEnum> UnsafeAttributes<T> getAttributes(String attributeTableId) {
+            return getUnsafeAttributes(attributeTableId);
+        }
+
+        @Override
+        public JavascriptExecutor getJSExecutor() {
+            return executor;
+        }
+
+        @Override
+        public WebDriver getWebDriver() {
+            return driver;
+        }
+    };
+
+    public BasicTestChain tester() {
+        return new BasicTestChainImpl(testResourcesProvider);
+    }
+
+    public TriggerSingleEventTestChain eventTester() {
+        return new TriggerSingleEventTestChainImpl(testResourcesProvider);
+    }
+
+    public EventsOrderTestChain eventsOrderTester() {
+        return new EventsOrderTestChainImpl(testResourcesProvider);
     }
 }
