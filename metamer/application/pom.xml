@@ -167,7 +167,11 @@ FSF site: http://www.fsf.org. -->
             <groupId>net.sourceforge.cssparser</groupId>
             <artifactId>cssparser</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.jboss.spec.javax.jms</groupId>
+            <artifactId>jboss-jms-api_2.0_spec</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -318,15 +322,15 @@ FSF site: http://www.fsf.org. -->
                     </plugin>
                 </plugins>
             </build>
-             <dependencies>
-                 <!-- workaround for RF-13730/RFPL-3242 -->
-                 <dependency>
-                     <groupId>org.glassfish</groupId>
-                     <artifactId>javax.faces</artifactId>
-                     <version>2.2.9</version>
-                     <scope>compile</scope>
-                 </dependency>
-             </dependencies>
+            <dependencies>
+                <!-- workaround for RF-13730/RFPL-3242 -->
+                <dependency>
+                    <groupId>org.glassfish</groupId>
+                    <artifactId>javax.faces</artifactId>
+                    <version>2.2.9</version>
+                    <scope>compile</scope>
+                </dependency>
+            </dependencies>
         </profile>
         <profile>
             <id>war-tomcat7-myfaces</id>
@@ -481,12 +485,12 @@ FSF site: http://www.fsf.org. -->
             <id>release</id>
             <dependencies>
                 <!-- workaround for RF-13730/RFPL-3242 -->
-                 <dependency>
-                     <groupId>org.glassfish</groupId>
-                     <artifactId>javax.faces</artifactId>
-                     <version>2.2.9</version>
-                     <scope>compile</scope>
-                 </dependency>
+                <dependency>
+                    <groupId>org.glassfish</groupId>
+                    <artifactId>javax.faces</artifactId>
+                    <version>2.2.9</version>
+                    <scope>compile</scope>
+                </dependency>
                 <dependency>
                     <groupId>org.apache.myfaces.core</groupId>
                     <artifactId>myfaces-api</artifactId>

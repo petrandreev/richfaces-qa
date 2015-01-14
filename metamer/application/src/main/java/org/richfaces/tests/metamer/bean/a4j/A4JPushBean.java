@@ -26,10 +26,14 @@ import static org.richfaces.demo.push.TopicsContextMessageProducer.PUSH_TOPICS_C
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.jms.JMSContext;
+import javax.jms.ObjectMessage;
+import javax.jms.Topic;
 
 import org.joda.time.DateTime;
 import org.richfaces.application.push.MessageException;
@@ -67,6 +71,10 @@ public class A4JPushBean implements Serializable {
     private static final String CDI_ADDRESS_2 = "cdiSampleAddress2";
     private static final String PUSH_TOPICS_CONTEXT_ADDRESS_1 = "tcSampleAddress1";
     private static final String PUSH_TOPICS_CONTEXT_ADDRESS_2 = "tcSampleAddress2";
+    private static final String JMS_ADDRESS_1 = "jmsSampleAddress1";
+    private static final String JMS_ADDRESS_1_JNDI = "jms/topic/sample1";
+    private static final String JMS_ADDRESS_2 = "jmsSampleAddress2";
+    private static final String JMS_ADDRESS_2_JNDI = "jms/topic/sample2";
 
     @Inject
     @Push(topic = CDI_ADDRESS_1)
@@ -75,12 +83,28 @@ public class A4JPushBean implements Serializable {
     @Push(topic = CDI_ADDRESS_2)
     private Event<String> messageProducerForAddress2;
 
+    @Inject
+    private transient JMSContext jmsContext;
+    // defined in standalone profile
+    @Resource(mappedName = JMS_ADDRESS_1)
+    private Topic jmsTopic1;
+    @Resource(mappedName = JMS_ADDRESS_2)
+    private Topic jmsTopic2;
+
     public String getCDIAddress1() {
         return CDI_ADDRESS_1;
     }
 
     public String getCDIAddress2() {
         return CDI_ADDRESS_2;
+    }
+
+    public String getJMSAddress1() {
+        return JMS_ADDRESS_1;
+    }
+
+    public String getJMSAddress2() {
+        return JMS_ADDRESS_2;
     }
 
     public String getTopicsContextAddress1() {
@@ -107,6 +131,8 @@ public class A4JPushBean implements Serializable {
         attributes.setAttribute("rendered", true);
         attributes.remove("address");
         attributes.remove("ondataavailable");
+        topicsContext.getOrCreateTopic(new TopicKey(JMS_ADDRESS_1));
+        topicsContext.getOrCreateTopic(new TopicKey(JMS_ADDRESS_2));
     }
 
     /**
@@ -125,6 +151,18 @@ public class A4JPushBean implements Serializable {
     public void pushWithCDI2() {
         messageProducerForAddress2.fire(new DateTime().toString(DATE_PATTERN));
         LOGGER.debug("cdi push event 2");
+    }
+
+    public void pushWithJMS1() {
+        ObjectMessage msg = jmsContext.createObjectMessage(new DateTime().toString(DATE_PATTERN));
+        jmsContext.createProducer().send(jmsTopic1, msg);
+        LOGGER.error("jms push event 1");
+    }
+
+    public void pushWithJMS2() {
+        ObjectMessage msg = jmsContext.createObjectMessage(new DateTime().toString(DATE_PATTERN));
+        jmsContext.createProducer().send(jmsTopic2, msg);
+        LOGGER.error("jms push event 2");
     }
 
     /**
