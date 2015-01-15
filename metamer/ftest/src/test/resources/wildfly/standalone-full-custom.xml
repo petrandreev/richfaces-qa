@@ -321,6 +321,7 @@
 
                 <security-settings>
                     <security-setting match="#">
+                        <!-- ####### some additions here ####### -->
                         <permission type="send" roles="guest"/>
                         <permission type="consume" roles="guest"/>
                         <permission type="createNonDurableQueue" roles="guest"/>
@@ -376,15 +377,12 @@
                     <jms-queue name="DLQ">
                         <entry name="java:/jms/queue/DLQ"/>
                     </jms-queue>
+                    <!-- ####### some additions here ####### -->
                     <jms-topic name="jmsSampleAddress1">
-                        <entry name="jmsSampleAddress1"/>
-                        <entry name="jms/topic/sample1"/>
-                        <entry name="java:jboss/exported/jms/topic/sample1"/>
+                        <entry name="topic/jmsSampleAddress1"/>
                     </jms-topic>
                     <jms-topic name="jmsSampleAddress2">
-                        <entry name="jmsSampleAddress2"/>
-                        <entry name="jms/topic/sample2"/>
-                        <entry name="java:jboss/exported/jms/topic/sample2"/>
+                        <entry name="topic/jmsSampleAddress2"/>
                     </jms-topic>
                 </jms-destinations>
             </hornetq-server>

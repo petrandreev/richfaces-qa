@@ -72,9 +72,9 @@ public class A4JPushBean implements Serializable {
     private static final String PUSH_TOPICS_CONTEXT_ADDRESS_1 = "tcSampleAddress1";
     private static final String PUSH_TOPICS_CONTEXT_ADDRESS_2 = "tcSampleAddress2";
     private static final String JMS_ADDRESS_1 = "jmsSampleAddress1";
-    private static final String JMS_ADDRESS_1_JNDI = "jms/topic/sample1";
+    private static final String JMS_ADDRESS_1_JNDI = "topic/jmsSampleAddress1";
     private static final String JMS_ADDRESS_2 = "jmsSampleAddress2";
-    private static final String JMS_ADDRESS_2_JNDI = "jms/topic/sample2";
+    private static final String JMS_ADDRESS_2_JNDI = "topic/jmsSampleAddress2";
 
     @Inject
     @Push(topic = CDI_ADDRESS_1)
@@ -86,9 +86,9 @@ public class A4JPushBean implements Serializable {
     @Inject
     private transient JMSContext jmsContext;
     // defined in standalone profile
-    @Resource(mappedName = JMS_ADDRESS_1)
+    @Resource(mappedName = JMS_ADDRESS_1_JNDI)
     private Topic jmsTopic1;
-    @Resource(mappedName = JMS_ADDRESS_2)
+    @Resource(mappedName = JMS_ADDRESS_2_JNDI)
     private Topic jmsTopic2;
 
     public String getCDIAddress1() {
@@ -131,8 +131,8 @@ public class A4JPushBean implements Serializable {
         attributes.setAttribute("rendered", true);
         attributes.remove("address");
         attributes.remove("ondataavailable");
-        topicsContext.getOrCreateTopic(new TopicKey(JMS_ADDRESS_1));
-        topicsContext.getOrCreateTopic(new TopicKey(JMS_ADDRESS_2));
+//        topicsContext.getOrCreateTopic(new TopicKey(JMS_ADDRESS_1));
+//        topicsContext.getOrCreateTopic(new TopicKey(JMS_ADDRESS_2));
     }
 
     /**
