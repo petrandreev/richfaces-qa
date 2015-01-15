@@ -38,7 +38,6 @@ import org.richfaces.tests.metamer.bean.a4j.A4JPushBean;
 import org.richfaces.tests.metamer.ftest.AbstractWebDriverTest;
 import org.richfaces.tests.metamer.ftest.webdriver.Attributes;
 import org.richfaces.tests.metamer.ftest.webdriver.MetamerPage;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.google.common.base.Predicate;
@@ -77,6 +76,7 @@ public class TestTwoPush extends AbstractWebDriverTest {
 
     @Test(groups = "smoke")
     public void testBothPushes() {
+        waitUntilPushInitializes();
         verifyPushUpdate(3, TIME_WILL_UPDATE, page.getPush1BtnElement(), page.getOutput1Element());
         verifyPushUpdate(3, TIME_WILL_UPDATE, page.getPush2BtnElement(), page.getOutput2Element());
         verifyPushUpdate(1, TIME_WILL_NOT_UPDATE, page.getPush1BtnElement(), page.getOutput2Element());
@@ -95,6 +95,7 @@ public class TestTwoPush extends AbstractWebDriverTest {
 
     @Test
     public void testOnSubscribed() {
+        waitUntilPushInitializes();
         pushAttributes.set(PushAttributes.onsubscribed, "sessionStorage.setItem('metamerEvents', metamerEvents += 'onsubscribed ')");
         final String expected1 = "onsubscribed onsubscribed";
         final String expected2 = "onsubscribed onsubscribed onsubscribed";
@@ -119,6 +120,7 @@ public class TestTwoPush extends AbstractWebDriverTest {
 
     @Test
     public void testPushEnable() {
+        waitUntilPushInitializes();
         clickPushEnableCheckbox(false);// disable push updates
         clickPushEnableCheckbox(true);// enable push updates
         verifyPushUpdate(5, TIME_WILL_UPDATE, page.getPush1BtnElement(), page.getOutput1Element());
@@ -126,6 +128,7 @@ public class TestTwoPush extends AbstractWebDriverTest {
 
     @Test
     public void testSimplePushEventReceive() {
+        waitUntilPushInitializes();
         verifyPushUpdate(5, TIME_WILL_UPDATE, page.getPush1BtnElement(), page.getOutput1Element());
     }
 
@@ -146,10 +149,7 @@ public class TestTwoPush extends AbstractWebDriverTest {
      * When push component on page is disabled/re-enabled the same and even other push components don't receive updates for some
      * time. This method should wait until push receives updates. It continously clicks the second push button (second push is
      * always enabled) and checks if it received an update. Because of https://issues.jboss.org/browse/RF-12096.
-     *
-     * Sometimes the push is not initialized on page load, this will initialize push before each test.
      */
-    @BeforeMethod(alwaysRun = true, dependsOnMethods = "loadPage")
     public void waitUntilPushInitializes() {
         new WebDriverWait(driver, 70, 1000)
             .withMessage("Waiting for push to reinitialize")
