@@ -131,8 +131,6 @@ public class A4JPushBean implements Serializable {
         attributes.setAttribute("rendered", true);
         attributes.remove("address");
         attributes.remove("ondataavailable");
-//        topicsContext.getOrCreateTopic(new TopicKey(JMS_ADDRESS_1));
-//        topicsContext.getOrCreateTopic(new TopicKey(JMS_ADDRESS_2));
     }
 
     /**
