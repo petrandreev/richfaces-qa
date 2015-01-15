@@ -156,13 +156,13 @@ public class A4JPushBean implements Serializable {
     public void pushWithJMS1() {
         ObjectMessage msg = jmsContext.createObjectMessage(new DateTime().toString(DATE_PATTERN));
         jmsContext.createProducer().send(jmsTopic1, msg);
-        LOGGER.error("jms push event 1");
+        LOGGER.debug("jms push event 1");
     }
 
     public void pushWithJMS2() {
         ObjectMessage msg = jmsContext.createObjectMessage(new DateTime().toString(DATE_PATTERN));
         jmsContext.createProducer().send(jmsTopic2, msg);
-        LOGGER.error("jms push event 2");
+        LOGGER.debug("jms push event 2");
     }
 
     /**
