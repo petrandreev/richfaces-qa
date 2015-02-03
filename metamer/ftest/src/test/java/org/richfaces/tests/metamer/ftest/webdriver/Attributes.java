@@ -128,7 +128,7 @@ public class Attributes<T extends AttributeEnum> {
         Action jsAction = new Action() {
             @Override
             public void perform() {
-                Utils.triggerJQ(event, elementToJs);
+                Utils.triggerJQ((JavascriptExecutor) getBrowser(), event, elementToJs);
             }
         };
         return new ActionWrapper(jsAction);
