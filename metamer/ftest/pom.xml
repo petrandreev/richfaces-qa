@@ -194,6 +194,7 @@ FSF site: http://www.fsf.org. -->
                         <project.build.directory>${project.build.directory}</project.build.directory>
                         <activated.maven.profiles>${qa.activated.profiles}</activated.maven.profiles>
                         <eap.ws.enabled>${eap.ws.enabled}</eap.ws.enabled>
+                        <configurator.skip.enabled>true</configurator.skip.enabled>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

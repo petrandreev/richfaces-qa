@@ -43,7 +43,9 @@ public class Configurator {
 
     public Configurator() {
         // FIFO queue
-        manager.addExtension(new SkipConfigurator());
+        if (isSkipConfiguratorEnabled()) {
+            manager.addExtension(new SkipConfigurator());
+        }
         manager.addExtension(new TemplatesConfigurator());
         manager.addExtension(new UseForAllTestsConfigurator());
         manager.addExtension(new UseWithFieldConfigurator());
@@ -62,6 +64,10 @@ public class Configurator {
 
     private Object[][] createInvocationsOfTestMethod(int count) {
         return new Object[count][0];
+    }
+
+    private boolean isSkipConfiguratorEnabled() {
+        return Boolean.getBoolean("configurator.skip.enabled");
     }
 
     /**
