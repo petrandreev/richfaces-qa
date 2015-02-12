@@ -63,7 +63,7 @@ FSF site: http://www.fsf.org. -->
         <screenshooter.version>${arquillian.graphene.version}</screenshooter.version>
         <arquillian.glassfish3-1.version>1.0.0.CR4</arquillian.glassfish3-1.version>
         <arquillian.openshift-express>1.0.0.Beta1</arquillian.openshift-express>
-        <shrinkwrap.descriptors.version>2.0.0-alpha-6</shrinkwrap.descriptors.version>
+        <shrinkwrap.descriptors.version>2.0.0-alpha-7</shrinkwrap.descriptors.version>
 
         <jboss.javaee6.spec.version>3.0.2.Final</jboss.javaee6.spec.version>
 
