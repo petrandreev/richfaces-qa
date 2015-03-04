@@ -154,9 +154,14 @@ public class TestTwoPush extends AbstractWebDriverTest {
         new WebDriverWait(driver, 70, 1000)
             .withMessage("Waiting for push to reinitialize")
             .until(new Predicate<WebDriver>() {
+                private int i = 0;
+                private final int iterationsBeforePageReload = 5;// reload page every nth iteration
 
                 @Override
                 public boolean apply(WebDriver input) {
+                    if (++i % iterationsBeforePageReload == 0) {
+                        loadPage();
+                    }
                     DateTime time1 = getTimeFromOutput(page.getOutput2Element());
                     MetamerPage.requestTimeChangesWaiting(page.getPush2BtnElement()).click();
                     DateTime time2 = getTimeFromOutput(page.getOutput2Element());
